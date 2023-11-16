@@ -25,3 +25,13 @@ func damage(amount: int = 1):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func _on_left_wall_child_entered_tree(node):
+	$"../UFO1".reverse()
+	$"../UFO2".reverse()
+	$"../UFO3".reverse()
+
+func _on_right_wall_child_entered_tree(node):
+	$"../UFO3".reverse()
+	$"../UFO2".reverse()
+	$"../UFO3".reverse()

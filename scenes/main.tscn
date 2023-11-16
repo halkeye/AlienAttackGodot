@@ -21,19 +21,19 @@ text = "0
 "
 
 [node name="City1" parent="." instance=ExtResource("2_7k887")]
-position = Vector2(0, 136)
+position = Vector2(152, 589)
 
 [node name="City2" parent="." instance=ExtResource("2_7k887")]
-position = Vector2(96, 136)
+position = Vector2(271, 589)
 
 [node name="City3" parent="." instance=ExtResource("2_7k887")]
-position = Vector2(192, 136)
+position = Vector2(368, 589)
 
 [node name="UFO1" parent="." instance=ExtResource("2_mxiys")]
-position = Vector2(0, 32)
+position = Vector2(88, 64)
 
 [node name="UFO2" parent="." instance=ExtResource("2_mxiys")]
-position = Vector2(104, 40)
+position = Vector2(350, 109)
 
 [node name="UFO3" parent="." instance=ExtResource("2_mxiys")]
-position = Vector2(216, 0)
+position = Vector2(706, 30)
