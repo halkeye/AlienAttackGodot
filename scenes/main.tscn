@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://g0jaoevp4k4b"]
+
+[ext_resource type="PackedScene" uid="uid://diqwmmt6lahvb" path="res://scenes/city.tscn" id="2_7k887"]
+[ext_resource type="PackedScene" uid="uid://dc24bqyqq7dn4" path="res://scenes/ufo.tscn" id="2_mxiys"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Score" type="Node" parent="."]
+
+[node name="Value" type="Label" parent="Score"]
+offset_right = 40.0
+offset_bottom = 26.0
+text = "Score:
+"
+
+[node name="Label" type="Label" parent="Score"]
+offset_left = 48.0
+offset_right = 88.0
+offset_bottom = 26.0
+text = "0
+"
+
+[node name="City1" parent="." instance=ExtResource("2_7k887")]
+position = Vector2(0, 136)
+
+[node name="City2" parent="." instance=ExtResource("2_7k887")]
+position = Vector2(96, 136)
+
+[node name="City3" parent="." instance=ExtResource("2_7k887")]
+position = Vector2(192, 136)
+
+[node name="UFO1" parent="." instance=ExtResource("2_mxiys")]
+position = Vector2(0, 32)
+
+[node name="UFO2" parent="." instance=ExtResource("2_mxiys")]
+position = Vector2(104, 40)
+
+[node name="UFO3" parent="." instance=ExtResource("2_mxiys")]
+position = Vector2(216, 0)

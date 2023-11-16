@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dc24bqyqq7dn4"]
+
+[ext_resource type="Script" path="res://scenes/ufo.gd" id="1_xsc54"]
+[ext_resource type="Texture2D" uid="uid://c6ucnqhk06606" path="res://sprites/UFO.png" id="2_eiiit"]
+
+[node name="UFO" type="Node2D"]
+script = ExtResource("1_xsc54")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_eiiit")
+centered = false
