@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name UFO
 
 @export_group("Health")
 @export var health: int = 1 : set=set_health
@@ -44,5 +45,9 @@ func _process(delta):
 	pass
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
+	speed = -1 * speed 
+	velocity = Vector2(speed, 0)
+
+func reverse():
 	speed = -1 * speed 
 	velocity = Vector2(speed, 0)

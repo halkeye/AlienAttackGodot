@@ -8,13 +8,11 @@ radius = 17.0
 height = 82.0
 
 [node name="UFO" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_xsc54")
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0.500002, 9.53674e-07)
-scale = Vector2(4.05, 1.7)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -22,5 +20,3 @@ shape = SubResource("CapsuleShape2D_12iq2")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_eiiit")
-
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

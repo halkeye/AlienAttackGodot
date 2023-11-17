@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://g0jaoevp4k4b"]
+[gd_scene load_steps=5 format=3 uid="uid://g0jaoevp4k4b"]
 
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_1xagb"]
 [ext_resource type="PackedScene" uid="uid://diqwmmt6lahvb" path="res://scenes/city.tscn" id="2_7k887"]
 [ext_resource type="PackedScene" uid="uid://dc24bqyqq7dn4" path="res://scenes/ufo.tscn" id="2_mxiys"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwpw8"]
+size = Vector2(20, 719.5)
+
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_1xagb")
 
 [node name="Score" type="Node" parent="."]
 
@@ -37,3 +42,21 @@ position = Vector2(350, 109)
 
 [node name="UFO3" parent="." instance=ExtResource("2_mxiys")]
 position = Vector2(706, 30)
+
+[node name="LeftWall" type="Area2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("RectangleShape2D_dwpw8")
+
+[node name="RightWall" type="Area2D" parent="."]
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(1152, -1)
+shape = SubResource("RectangleShape2D_dwpw8")
+
+[connection signal="body_entered" from="LeftWall" to="." method="_on_left_wall_body_entered"]
+[connection signal="body_entered" from="RightWall" to="." method="_on_right_wall_body_entered"]
