@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciao30641xgpe"
-path="res://.godot/imported/Basic Gun.png-ac51e01bc1cb721219f859b88e11445a.ctex"
+uid="uid://8oecnk5xvaa"
+path="res://.godot/imported/firestormgun.png-ab43ed64b3e802ee768bfd626355bd33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Basic Gun.png"
-dest_files=["res://.godot/imported/Basic Gun.png-ac51e01bc1cb721219f859b88e11445a.ctex"]
+source_file="res://sprites/weapons/firestormgun.png"
+dest_files=["res://.godot/imported/firestormgun.png-ab43ed64b3e802ee768bfd626355bd33.ctex"]
 
 [params]
 

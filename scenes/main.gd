@@ -1,6 +1,5 @@
 extends Node2D
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -21,6 +20,9 @@ func _process(delta):
 	pass
 
 func _on_right_wall_body_entered(body):
+	if body.has_method("on_wall_hit"):
+		body.on_wall_hit()
+		
 	if body is UFO:
 		body.reverse()
 
