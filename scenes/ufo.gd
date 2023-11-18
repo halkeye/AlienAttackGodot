@@ -32,13 +32,15 @@ func _physics_process(delta):
 			collision.get_collider().hit()
 				
 func set_health(value : int) -> void:
-	health += value
+	health = value
 	if (health <= 0):
 		$Sprite.set_texture(dead_image)
 	else:
 		$Sprite.set_texture(image)
 	
 func damage(amount: int = 1):
+	print("pre damage health: ", health)
+	print("damage: ", amount)
 	health -= amount
 
 func _process(delta):

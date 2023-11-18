@@ -37,7 +37,6 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				var mouse_position = get_global_mouse_position()
-				print(mouse_position)
 				$Weapon.fire(bullet_scene, get_global_mouse_position())
 				$Weapon2.fire(bullet_scene, get_global_mouse_position())
 
