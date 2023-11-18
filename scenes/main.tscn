@@ -29,29 +29,37 @@ text = "0
 "
 
 [node name="City1" parent="." instance=ExtResource("2_7k887")]
-position = Vector2(152, 589)
+position = Vector2(182, 524)
+scale = Vector2(2, 2)
 
 [node name="City2" parent="." instance=ExtResource("2_7k887")]
-position = Vector2(271, 589)
+position = Vector2(400, 520)
+scale = Vector2(2, 2)
 
 [node name="City3" parent="." instance=ExtResource("2_7k887")]
-position = Vector2(368, 589)
+position = Vector2(583, 522)
+scale = Vector2(2, 2)
 
 [node name="UFO1" parent="." instance=ExtResource("2_mxiys")]
-position = Vector2(88, 64)
+position = Vector2(150, 67)
+scale = Vector2(2, 2)
 
 [node name="UFO2" parent="." instance=ExtResource("2_mxiys")]
-position = Vector2(350, 109)
+position = Vector2(317, 208)
+scale = Vector2(2, 2)
 
 [node name="UFO3" parent="." instance=ExtResource("2_mxiys")]
-position = Vector2(706, 30)
+position = Vector2(499, 50)
+scale = Vector2(2, 2)
 
 [node name="Weapon" parent="." instance=ExtResource("4_edgso")]
-position = Vector2(0, 647)
+position = Vector2(16, 637)
+scale = Vector2(2, 2)
 gun_type = "Zapper"
 
 [node name="Weapon2" parent="." instance=ExtResource("4_edgso")]
-position = Vector2(1108, 648)
+position = Vector2(861, 635)
+scale = Vector2(2, 2)
 
 [node name="LeftWall" type="Area2D" parent="."]
 collision_layer = 15
