@@ -27,10 +27,17 @@ jobs:
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
-      - name: Windows Build
+      - name: Build
         run: |
-          mkdir -v -p build/windows
-          godot -v --headless --export-release "${{ matrix.platform }}" build/${{ matrix.platform }}/
+          export FILENAME=$EXPORT_NAME
+          if [ "${{ matrix.platform }}" == "windows" ]; then
+            FILENAME="$EXPORT_NAME.exe"
+          fi
+          if [ "${{ matrix.platform }}" == "web" ]; then
+            FILENAME="index.html"
+          fi
+          mkdir -v -p build/${{ matrix.platform }}
+          godot -v --headless --export-release "${{ matrix.platform }}" build/${{ matrix.platform }}/$FILENAME
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
