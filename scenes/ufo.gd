@@ -39,8 +39,6 @@ func set_health(value : int) -> void:
 		$Sprite.set_texture(image)
 	
 func damage(amount: int = 1):
-	print("pre damage health: ", health)
-	print("damage: ", amount)
 	health -= amount
 
 func _process(delta):
