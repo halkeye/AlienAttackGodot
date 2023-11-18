@@ -6,9 +6,9 @@ env:
   EXPORT_NAME: AlienAttack
 
 jobs:
-  export-windows:
-    name: Windows Export
-    runs-on: ubuntu-20.04
+  export:
+    name: ${{ matrix.platform }} Export
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         platform:
@@ -29,20 +29,13 @@ jobs:
           mv /root/.local/share/godot/templates/${GODOT_VERSION}.stable ~/.local/share/godot/templates/${GODOT_VERSION}.stable
       - name: Build
         run: |
-          export FILENAME=$EXPORT_NAME
-          if [ "${{ matrix.platform }}" == "windows" ]; then
-            FILENAME="$EXPORT_NAME.exe"
-          fi
-          if [ "${{ matrix.platform }}" == "web" ]; then
-            FILENAME="index.html"
-          fi
           mkdir -v -p build/${{ matrix.platform }}
-          godot -v --headless --export-release "${{ matrix.platform }}" build/${{ matrix.platform }}/$FILENAME
+          godot -v --headless --export-release "${{ matrix.platform }}"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: windows
-          path: build/windows
+          name: ${{ matrix.platform }}
+          path: build/${{ matrix.platform }}
 
 
       # - name: Upload Artifact
