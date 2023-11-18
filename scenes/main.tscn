@@ -33,7 +33,7 @@ position = Vector2(182, 524)
 scale = Vector2(2, 2)
 
 [node name="City2" parent="." instance=ExtResource("2_7k887")]
-position = Vector2(400, 520)
+position = Vector2(375, 522)
 scale = Vector2(2, 2)
 
 [node name="City3" parent="." instance=ExtResource("2_7k887")]
@@ -66,6 +66,7 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(0, 280)
 shape = SubResource("RectangleShape2D_dwpw8")
 
 [node name="RightWall" type="Area2D" parent="."]
@@ -73,7 +74,7 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
-position = Vector2(1152, -1)
+position = Vector2(1152, 280)
 shape = SubResource("RectangleShape2D_dwpw8")
 
 [connection signal="body_entered" from="LeftWall" to="." method="_on_left_wall_body_entered"]
