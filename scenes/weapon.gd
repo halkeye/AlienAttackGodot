@@ -35,7 +35,7 @@ func set_gun_type(type):
 func fire(bullet_scene: PackedScene, pos: Vector2):
 	var bullet = bullet_scene.instantiate()
 	bullet.start($".".global_position, (pos - global_position).angle())
-	get_tree().root.add_child(bullet)
+	return bullet
 
 func next_weapon(): 
 	if gun_type == GunType.BASIC:

@@ -39,8 +39,18 @@ func set_health(value : int) -> void:
 		$Sprite.set_texture(image)
 	
 func damage(amount: int = 1):
-	health -= amount
+	# if no health yet, cant take damage
+	if health > 0:
+		health -= amount
 
+func fire(bullet_scene: PackedScene, pos: Vector2):
+	var bullet = bullet_scene.instantiate()
+	#var starting_pos = Vector2(398,254)
+	var starting_pos = $".".global_position
+	bullet.set_collision_mask(1 << 2)
+	bullet.start(starting_pos, (pos - starting_pos).angle())
+	return bullet
+	
 func _process(delta):
 	pass
 

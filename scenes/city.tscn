@@ -1,11 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://diqwmmt6lahvb"]
+[gd_scene load_steps=4 format=3 uid="uid://diqwmmt6lahvb"]
 
 [ext_resource type="Texture2D" uid="uid://5rr4fhfeon6k" path="res://sprites/City.png" id="1_rpra2"]
 [ext_resource type="Script" path="res://scenes/city.gd" id="1_v8tpo"]
 
-[node name="City" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vw8vn"]
+size = Vector2(74, 42)
+
+[node name="City" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_v8tpo")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_rpra2")
 centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(35, 35)
+shape = SubResource("RectangleShape2D_vw8vn")

@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var bullet_scene: PackedScene
+@export var ufos : Array[UFO] = []
 
 func _ready():
 #	var viewport = get_viewport_rect()
@@ -35,8 +36,8 @@ func _unhandled_input(event):
 			if event.pressed:
 				print("_unhandled_input.event: ", event)
 				var mouse_position = get_global_mouse_position()
-				$Weapon.fire(bullet_scene, get_global_mouse_position())
-				$Weapon2.fire(bullet_scene, get_global_mouse_position())
+				get_tree().root.add_child($Weapon.fire(bullet_scene, get_global_mouse_position()))
+				get_tree().root.add_child($Weapon2.fire(bullet_scene, get_global_mouse_position()))
 
 	if event is InputEventScreenTouch:
 		if event.pressed:
@@ -51,3 +52,12 @@ func _on_weapon_input_event(viewport, event, shape_idx):
 	if event.is_action_pressed("switch"):
 		$Weapon.gun_type = $Weapon.gun_type + 1
 		$Weapon2.gun_type = $Weapon2.gun_type + 1
+
+
+func _on_ufo_fire_timer_timeout():
+	var ufo = ufos[randi_range(0, len(ufos)-1)]
+	$UFOTargetPath/PathFollow2D.progress_ratio = randf()
+	var bullet = ufo.fire(bullet_scene, $UFOTargetPath/PathFollow2D.position)
+	get_tree().root.add_child(bullet)
+	
+	
