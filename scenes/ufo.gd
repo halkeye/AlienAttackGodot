@@ -70,5 +70,4 @@ func reverse():
 	speed = -1 * speed 
 	velocity = Vector2(speed, 0)
 	if is_dead():
-		health_depleted.emit(self)
 		queue_free()

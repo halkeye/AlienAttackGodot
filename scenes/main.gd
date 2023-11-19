@@ -3,6 +3,8 @@ extends Node2D
 @export var bullet_scene: PackedScene
 @export var ufos : Array[UFO] = []
 
+var score = 0
+
 func _ready():
 #	var viewport = get_viewport_rect()
 #	$"LeftWall/CollisionShape2D".shape.size.x = 4
@@ -19,6 +21,7 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	$"Score/Value".text = str(score)
 	pass
 
 func _on_right_wall_body_entered(body):
@@ -68,3 +71,4 @@ func _on_ufo_fire_timer_timeout():
 func _on_ufo_health_depleted(ufo: UFO):
 	var idx = ufos.find(ufo)
 	ufos.remove_at(idx)
+	score += 1

@@ -22,13 +22,13 @@ ufos = [NodePath("UFO1"), NodePath("UFO2"), NodePath("UFO3")]
 
 [node name="Score" type="Node" parent="."]
 
-[node name="Value" type="Label" parent="Score"]
+[node name="Label" type="Label" parent="Score"]
 offset_right = 40.0
 offset_bottom = 26.0
 text = "Score:
 "
 
-[node name="Label" type="Label" parent="Score"]
+[node name="Value" type="Label" parent="Score"]
 offset_left = 48.0
 offset_right = 88.0
 offset_bottom = 26.0
