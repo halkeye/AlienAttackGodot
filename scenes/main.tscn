@@ -99,6 +99,7 @@ collision_mask = 15
 position = Vector2(960, 288)
 shape = SubResource("RectangleShape2D_dwpw8")
 
+[connection signal="health_depleted" from="UFO1" to="." method="_on_ufo_health_depleted"]
 [connection signal="timeout" from="UFOFireTimer" to="." method="_on_ufo_fire_timer_timeout"]
 [connection signal="body_entered" from="LeftWall" to="." method="_on_left_wall_body_entered"]
 [connection signal="body_entered" from="RightWall" to="." method="_on_right_wall_body_entered"]

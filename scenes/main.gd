@@ -14,6 +14,8 @@ func _ready():
 #	$"RightWall/CollisionShape2D".shape.size.y = viewport.size.y
 #	$"RightWall/CollisionShape2D".position.x = viewport.size.x - 2
 #	$"RightWall/CollisionShape2D".position.y = viewport.size.y / 2
+	for ufo in ufos:
+		ufo.health_depleted.connect(_on_ufo_health_depleted)
 	pass # Replace with function body.
 
 func _process(delta):
@@ -55,8 +57,14 @@ func _on_weapon_input_event(viewport, event, shape_idx):
 
 
 func _on_ufo_fire_timer_timeout():
+	if len(ufos) == 0:
+		## there should never be no ufos normally, but guard incase
+		return
+		
 	var ufo = ufos[randi_range(0, len(ufos)-1)]
 	$UFOTargetPath/PathFollow2D.progress_ratio = randf()
 	var bullet = ufo.fire(bullet_scene, $UFOTargetPath/PathFollow2D.position)
 	
-	
+func _on_ufo_health_depleted(ufo: UFO):
+	var idx = ufos.find(ufo)
+	ufos.remove_at(idx)

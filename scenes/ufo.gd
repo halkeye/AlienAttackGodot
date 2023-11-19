@@ -5,8 +5,10 @@ class_name UFO
 @export var health: int = 1 : set=set_health
 @export var max_health:int = 1
 
-@onready var image = preload("res://sprites/UFO.png")
-@onready var dead_image = preload("res://sprites/UFOBoom.png")
+signal health_depleted(ufo: UFO)
+
+const image = preload("res://sprites/UFO.png")
+const dead_image = preload("res://sprites/UFOBoom.png")
 
 var speed = 150
 
@@ -33,7 +35,7 @@ func _physics_process(delta):
 				
 func set_health(value : int) -> void:
 	health = value
-	if (health <= 0):
+	if (is_dead()):
 		$Sprite.set_texture(dead_image)
 	else:
 		$Sprite.set_texture(image)
@@ -42,8 +44,14 @@ func damage(amount: int = 1):
 	# if no health yet, cant take damage
 	if health > 0:
 		health -= amount
+		if is_dead():
+			health_depleted.emit(self)
+			
 
 func fire(bullet_scene: PackedScene, pos: Vector2):
+	if is_dead():
+		return
+		
 	var bullet = bullet_scene.instantiate()
 	var starting_pos = $".".global_position
 	bullet.set_collision_mask(1 << 2)
@@ -54,10 +62,13 @@ func fire(bullet_scene: PackedScene, pos: Vector2):
 func _process(delta):
 	pass
 
-func _on_visible_on_screen_notifier_2d_screen_exited():
-	speed = -1 * speed 
-	velocity = Vector2(speed, 0)
-
+func is_dead():
+	return health <= 0
+	
+# TODO - rename to wall bounce?
 func reverse():
 	speed = -1 * speed 
 	velocity = Vector2(speed, 0)
+	if is_dead():
+		health_depleted.emit(self)
+		queue_free()
