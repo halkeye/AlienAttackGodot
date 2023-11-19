@@ -1,33 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqlch05ol3ig3"]
+[gd_scene load_steps=3 format=3 uid="uid://bqlch05ol3ig3"]
 
 [ext_resource type="Script" path="res://scenes/weapon.gd" id="1_vchuq"]
 [ext_resource type="Texture2D" uid="uid://ciao30641xgpe" path="res://sprites/weapons/Basic Gun.png" id="1_y6p8q"]
-[ext_resource type="Texture2D" uid="uid://8oecnk5xvaa" path="res://sprites/weapons/firestormgun.png" id="2_3bp5u"]
-[ext_resource type="Texture2D" uid="uid://dwfclgdecpwwl" path="res://sprites/weapons/wideareagun.png" id="3_1b5j4"]
-[ext_resource type="Texture2D" uid="uid://dhgnsjrqbiy4b" path="res://sprites/weapons/zappergun.png" id="4_8e272"]
 
-[node name="Weapon" type="CharacterBody2D"]
+[node name="Weapon" type="TextureButton"]
+offset_left = -24.0
+offset_top = -32.0
+offset_right = 24.0
+offset_bottom = 31.0
+mouse_default_cursor_shape = 2
+action_mode = 0
+texture_normal = ExtResource("1_y6p8q")
 script = ExtResource("1_vchuq")
 
-[node name="BasicGun" type="Sprite2D" parent="."]
-position = Vector2(0, -29)
-texture = ExtResource("1_y6p8q")
-centered = false
-
-[node name="Firestormgun" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -61)
-texture = ExtResource("2_3bp5u")
-centered = false
-
-[node name="Wideareagun" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -38)
-texture = ExtResource("3_1b5j4")
-centered = false
-
-[node name="Zappergun" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -63)
-texture = ExtResource("4_8e272")
-centered = false
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

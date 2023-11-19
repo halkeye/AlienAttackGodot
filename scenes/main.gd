@@ -33,6 +33,7 @@ func _unhandled_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
+				print("_unhandled_input.event: ", event)
 				var mouse_position = get_global_mouse_position()
 				$Weapon.fire(bullet_scene, get_global_mouse_position())
 				$Weapon2.fire(bullet_scene, get_global_mouse_position())
@@ -42,3 +43,11 @@ func _unhandled_input(event):
 			print("screen was touched at ", event.position)
 		else:
 			print("screen was released")
+
+
+func _on_weapon_input_event(viewport, event, shape_idx):
+	print("_on_weapon_input_event.event: ", event)
+	print("_on_weapon_input_event.shape_idx: ", shape_idx)
+	if event.is_action_pressed("switch"):
+		$Weapon.gun_type = $Weapon.gun_type + 1
+		$Weapon2.gun_type = $Weapon2.gun_type + 1

@@ -1,6 +1,17 @@
-extends CharacterBody2D
+extends TextureButton
 
-@export_enum("Basic", "Firestorm", "Widearea", "Zapper") var gun_type: String = "Basic" : set=set_gun_type
+enum GunType {
+	BASIC,
+	FIRESTORM,
+	WIDEAREA,
+	ZAPPER,
+}
+@export var gun_type: GunType = GunType.BASIC : set=set_gun_type
+
+@onready var basic_gun_image = preload("res://sprites/weapons/Basic Gun.png")
+@onready var firestorm_gun_image = preload("res://sprites/weapons/firestormgun.png")
+@onready var widearea_gun_image = preload("res://sprites/weapons/wideareagun.png")
+@onready var zapper_gun_image = preload("res://sprites/weapons/zappergun.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -11,21 +22,33 @@ func _process(delta):
 	pass
 	
 func set_gun_type(type):
-	$BasicGun.hide()
-	$Firestormgun.hide()
-	$Wideareagun.hide()
-	$Zappergun.hide()
-	
-	if type == "Basic":
-		$BasicGun.show()
-	elif type == "Firestorm":
-		$Firestormgun.show()
-	elif type == "Widearea":
-		$Wideareagun.show()
-	elif type == "Zapper":
-		$Zappergun.show()
+	if type == GunType.BASIC:
+		$".".set_texture_normal(basic_gun_image)
+	elif type == GunType.FIRESTORM:
+		$".".set_texture_normal(firestorm_gun_image)
+	elif type ==GunType.WIDEAREA:
+		$".".set_texture_normal(widearea_gun_image)
+	elif type == GunType.ZAPPER:
+		$".".set_texture_normal(zapper_gun_image)
+	gun_type = type
 				
 func fire(bullet_scene: PackedScene, pos: Vector2):
 	var bullet = bullet_scene.instantiate()
 	bullet.start($".".global_position, (pos - global_position).angle())
 	get_tree().root.add_child(bullet)
+
+func next_weapon(): 
+	if gun_type == GunType.BASIC:
+		gun_type = GunType.FIRESTORM
+	elif gun_type == GunType.FIRESTORM:
+		gun_type = GunType.WIDEAREA
+	elif gun_type == GunType.WIDEAREA:
+		gun_type = GunType.ZAPPER
+	elif gun_type == GunType.ZAPPER:
+		gun_type = GunType.BASIC
+		
+func _on_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				next_weapon()
