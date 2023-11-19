@@ -36,8 +36,8 @@ func _unhandled_input(event):
 			if event.pressed:
 				print("_unhandled_input.event: ", event)
 				var mouse_position = get_global_mouse_position()
-				get_tree().root.add_child($Weapon.fire(bullet_scene, get_global_mouse_position()))
-				get_tree().root.add_child($Weapon2.fire(bullet_scene, get_global_mouse_position()))
+				$Weapon.fire(bullet_scene, get_global_mouse_position())
+				$Weapon2.fire(bullet_scene, get_global_mouse_position())
 
 	if event is InputEventScreenTouch:
 		if event.pressed:
@@ -58,6 +58,5 @@ func _on_ufo_fire_timer_timeout():
 	var ufo = ufos[randi_range(0, len(ufos)-1)]
 	$UFOTargetPath/PathFollow2D.progress_ratio = randf()
 	var bullet = ufo.fire(bullet_scene, $UFOTargetPath/PathFollow2D.position)
-	get_tree().root.add_child(bullet)
 	
 	
