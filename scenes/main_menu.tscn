@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://by53gn62dlhjt"]
 
 [ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_777h8"]
-[ext_resource type="Texture2D" uid="uid://barlretbr5war" path="res://artwork/splash/Splash.png" id="1_ifwcv"]
+[ext_resource type="Texture2D" uid="uid://dsm30pxk170dw" path="res://artwork/splash/SplashRemastered.png" id="2_htqyp"]
 
 [node name="MainMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -42,8 +42,8 @@ text = "G4V Dev"
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
 layout_mode = 2
 
-[node name="Spaslh" type="TextureRect" parent="HBoxContainer/CenterContainer"]
+[node name="Splash" type="TextureRect" parent="HBoxContainer/CenterContainer"]
 layout_mode = 2
-texture = ExtResource("1_ifwcv")
+texture = ExtResource("2_htqyp")
 
 [connection signal="pressed" from="HBoxContainer/VBoxContainer/MenuOptions/New Game" to="." method="_on_new_game_pressed"]
