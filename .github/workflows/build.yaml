@@ -1,6 +1,9 @@
 name: "godot-ci export"
 on: push
 
+concurrency:
+  group: ${{ github.workflow }}
+
 env:
   GODOT_VERSION: 4.1.2
   EXPORT_NAME: AlienAttack
