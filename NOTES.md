@@ -7,6 +7,8 @@
 [x] mouse and touch can work the same
 [ ] arrow keys to change weapons (as before)
 [ ] Guns have cooldown/can only shoot once per second/delete old bullet create new one
+[ ] Add help to main menu
+[ ] make github action replace index.js to s/<script src="index.js">/<script src="index.js?m=timestamp">/
 
 Timer:
   can_shoot = true
