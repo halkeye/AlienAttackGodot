@@ -5,7 +5,7 @@ concurrency:
   group: ${{ github.workflow }}
 
 env:
-  GODOT_VERSION: 4.1.2
+  GODOT_VERSION: 4.2
   EXPORT_NAME: AlienAttack
 
 jobs:
@@ -20,7 +20,7 @@ jobs:
           - mac
           - web
     container:
-      image: barichello/godot-ci:4.1.2
+      image: barichello/godot-ci:4.2
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,7 +66,7 @@ jobs:
       - name: Preload threads script
         run: |-
           sed -i 's|headers.set("Cross-Origin-Embedder-Policy", "credentialless")|headers.set("Cross-Origin-Embedder-Policy", "require-corp")|g'  _site/enable-threads.js
-          sed -i 's|<script src="index.js"></script>|<script src="enable-threads.js"></script><script src="index.js"></script>|g' _site/index.html
+          sed -i 's|<script src="index.js?m=${{ github.sha }}"></script>|<script src="enable-threads.js"></script><script src="index.js"></script>|g' _site/index.html
 
       - name: Debug
         run: find
