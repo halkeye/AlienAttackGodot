@@ -42,12 +42,8 @@ func _unhandled_input(event):
 		else:
 			print("screen was released")
 
-
-func _on_weapon_input_event(_viewport, event, _shape_idx):
-	if event.is_action_pressed("switch"):
-		$Weapon.gun_type = $Weapon.gun_type + 1
-		$Weapon2.gun_type = $Weapon2.gun_type + 1
-
+	if event.is_action_pressed("weapon_switch"):
+		get_tree().call_group("weapons", "next_weapon")
 
 func _on_ufo_fire_timer_timeout():
 	var ufos = get_tree().get_nodes_in_group("ufos")
