@@ -11,16 +11,6 @@ var score = 0
 @onready var scoreLabel = $"Score/Value"
 
 func _ready():
-#	var viewport = get_viewport_rect()
-#	$"LeftWall/CollisionShape2D".shape.size.x = 4
-#	$"LeftWall/CollisionShape2D".shape.size.y = viewport.size.y
-#	$"LeftWall/CollisionShape2D".position.x = 2
-#	$"LeftWall/CollisionShape2D".position.y = viewport.size.y / 2
-#
-#	$"RightWall/CollisionShape2D".shape.size.x = 4
-#	$"RightWall/CollisionShape2D".shape.size.y = viewport.size.y
-#	$"RightWall/CollisionShape2D".position.x = viewport.size.x - 2
-#	$"RightWall/CollisionShape2D".position.y = viewport.size.y / 2+
 	for ufo in get_tree().get_nodes_in_group("ufos"):
 		ufo.health_depleted.connect(_on_ufo_health_depleted)
 
