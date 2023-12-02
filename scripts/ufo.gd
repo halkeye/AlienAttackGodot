@@ -1,24 +1,23 @@
-extends CharacterBody2D
+extends Area2D
 class_name UFO
 
 @export_group("Health")
 @export var health: int = 1 : set=set_health
 @export var max_health:int = 1
 
+@onready var screensize = get_viewport_rect().size
+
 signal health_depleted(ufo: UFO)
 
-const image = preload("res://sprites/UFO.png")
-const dead_image = preload("res://sprites/UFOBoom.png")
-
 var speed = 150
+var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	health = max_health
-	$Sprite.set_texture(image)
+	show_sprite($Ufo)
 	if randi_range(0, 1) == 0:
 		speed = -1 * speed 
-		
 	velocity = Vector2(speed, 0)
 		
 func start(_position, _direction):
@@ -26,19 +25,17 @@ func start(_position, _direction):
 	position = _position
 	velocity = Vector2(speed, 0).rotated(rotation)
 
-func _physics_process(delta):
-	var collision = move_and_collide(velocity * delta)
-	if collision:
-		velocity = velocity.bounce(collision.get_normal())
-		if collision.get_collider().has_method("hit"):
-			collision.get_collider().hit()
-				
+func _physics_process(_delta):
+	pass
+			
+func _process(delta):
+	position.x += delta * speed
+	pass
+	
 func set_health(value : int) -> void:
 	health = value
 	if (is_dead()):
-		$Sprite.set_texture(dead_image)
-	else:
-		$Sprite.set_texture(image)
+		show_sprite($Exploded)
 	
 func damage(amount: int = 1):
 	# if no health yet, cant take damage
@@ -46,7 +43,6 @@ func damage(amount: int = 1):
 		health -= amount
 		if is_dead():
 			health_depleted.emit(self)
-			
 
 func fire(bullet_scene: PackedScene, pos: Vector2):
 	if is_dead():
@@ -58,16 +54,33 @@ func fire(bullet_scene: PackedScene, pos: Vector2):
 	bullet.start(starting_pos, (pos - starting_pos).angle())
 	get_tree().root.add_child(bullet)
 	return bullet
-	
-func _process(delta):
-	pass
 
 func is_dead():
 	return health <= 0
 	
-# TODO - rename to wall bounce?
 func reverse():
 	speed = -1 * speed 
 	velocity = Vector2(speed, 0)
 	if is_dead():
 		queue_free()
+
+func set_on_fire():
+	show_sprite($Burn)
+	
+func is_on_fire():
+	return $Burn.visible
+
+func _on_area_entered(collided_with):
+	if collided_with is UFO:
+		if collided_with.is_on_fire():
+			set_on_fire()
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	reverse()
+
+func show_sprite(sprite: Sprite2D):
+	$Ufo.hide()
+	$Burn.hide()
+	$Exploded.hide()
+	$Zapped.hide()
+	sprite.show()

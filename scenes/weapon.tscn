@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqlch05ol3ig3"]
 
-[ext_resource type="Script" path="res://scenes/weapon.gd" id="1_vchuq"]
+[ext_resource type="Script" path="res://scripts/weapon.gd" id="1_vchuq"]
 [ext_resource type="Texture2D" uid="uid://ciao30641xgpe" path="res://sprites/weapons/Basic Gun.png" id="1_y6p8q"]
 
 [node name="Weapon" type="TextureButton"]

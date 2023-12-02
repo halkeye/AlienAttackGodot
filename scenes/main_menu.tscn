@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://by53gn62dlhjt"]
 
-[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_777h8"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_777h8"]
 [ext_resource type="Texture2D" uid="uid://dsm30pxk170dw" path="res://artwork/splash/SplashRemastered.png" id="2_htqyp"]
 
 [node name="MainMenu" type="MarginContainer"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://brkik230ark7q"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_kvj65"]
+[ext_resource type="PackedScene" uid="uid://dc24bqyqq7dn4" path="res://scenes/ufo.tscn" id="2_7s2um"]
+
+[node name="TestUfos" type="Node2D"]
+script = ExtResource("1_kvj65")
+
+[node name="UFO1" parent="." groups=["ufos"] instance=ExtResource("2_7s2um")]
+position = Vector2(150, 67)
+scale = Vector2(2, 2)

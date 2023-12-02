@@ -1,8 +1,8 @@
-extends CharacterBody2D
+extends Area2D
 
 @export_group("Health")
-@export var health: int = 3 : set=set_health
-@export var max_health:int = 3
+@export var health: int = 1 : set=set_health
+@export var max_health:int = 1
 
 @onready var image = preload("res://sprites/City.png")
 @onready var dead_image = preload("res://sprites/CityDie.png")
@@ -23,6 +23,5 @@ func set_health(value : int) -> void:
 func damage(amount: int = 1):
 	health -= amount
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
