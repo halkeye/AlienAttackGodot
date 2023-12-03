@@ -4,8 +4,8 @@ extends Area2D
 @export var health: int = 1 : set=set_health
 @export var max_health:int = 1
 
-@onready var image = preload("res://sprites/City.png")
-@onready var dead_image = preload("res://sprites/CityDie.png")
+@onready var image = preload("res://sprites/city/City.png")
+@onready var dead_image = preload("res://sprites/city/CityDie.png")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
