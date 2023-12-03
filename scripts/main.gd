@@ -25,12 +25,6 @@ func _unhandled_input(event):
 				var mouse_position = get_global_mouse_position()
 				get_tree().call_group("weapons", "fire", bullet_scene, mouse_position)
 
-	if event is InputEventScreenTouch:
-		if event.pressed:
-			print("screen was touched at ", event.position)
-		else:
-			print("screen was released")
-
 	if event.is_action_pressed("weapon_switch"):
 		get_tree().call_group("weapons", "next_weapon")
 
