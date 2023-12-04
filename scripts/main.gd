@@ -11,8 +11,8 @@ var score = 0
 @onready var scoreLabel = $"Score/Value"
 
 func gen_random_pos():
-	var x = randf_range(0, screensize.x)
-	var y = randf_range(0, screensize.y / 2)
+	var x = randf_range(60, screensize.x-60)
+	var y = randf_range(60, screensize.y / 2)
 	return Vector2(x, y)
 	
 func create_ufo():
@@ -49,9 +49,10 @@ func _on_ufo_fire_timer_timeout():
 		## there should never be no ufos normally, but guard incase
 		return
 		
-	var ufo = ufos[randi_range(0, len(ufos)-1)]
-	$UFOTargetPath/PathFollow2D.progress_ratio = randf()
-	ufo.fire(bullet_scene, $UFOTargetPath/PathFollow2D.position)
+	var ufo: UFO = ufos[randi_range(0, len(ufos)-1)]
+	if !ufo.is_dead():
+		$UFOTargetPath/PathFollow2D.progress_ratio = randf()
+		ufo.fire(bullet_scene, $UFOTargetPath/PathFollow2D.position)
 	
 func _on_ufo_health_depleted(ufo: UFO):
 	score += 1

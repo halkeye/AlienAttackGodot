@@ -7,8 +7,9 @@
 [x] mouse and touch can work the same
 [X] arrow keys to change weapons (as before)
 [ ] Guns have cooldown/can only shoot once per second/delete old bullet create new one
-[ ] Add help to main menu
+[X] Add help to main menu
 [X] make github action replace index.js to s/<script src="index.js">/<script src="index.js?m=timestamp">/
+[X] ~black background~
 
 Timer:
   can_shoot = true
@@ -16,7 +17,6 @@ fire:
   can_shoot = false
 
 Ufos respawn if they hit the edge and not all are dead yet
-black background
 better luck next time, then game exits
 
 	if (score_ >= roundno_ * WINNING_MULTIPLIER)
