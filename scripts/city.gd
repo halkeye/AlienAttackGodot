@@ -1,4 +1,5 @@
 extends Area2D
+class_name City
 
 @export_group("Health")
 @export var health: int = 1 : set=set_health
