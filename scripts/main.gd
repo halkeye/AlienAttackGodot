@@ -10,7 +10,22 @@ var score = 0
 
 @onready var scoreLabel = $"Score/Value"
 
+func gen_random_pos():
+	var x = randf_range(0, screensize.x)
+	var y = randf_range(0, screensize.y / 2)
+	return Vector2(x, y)
+	
+func create_ufo():
+	var ufo = preload("res://scenes/ufo.tscn").instantiate()
+	ufo.position = gen_random_pos()
+	ufo.scale = Vector2(2, 2)
+	ufo.add_to_group("ufos")
+	add_child(ufo)
+	
 func _ready():
+	create_ufo()
+	create_ufo()
+	create_ufo()
 	for ufo in get_tree().get_nodes_in_group("ufos"):
 		ufo.health_depleted.connect(_on_ufo_health_depleted)
 
