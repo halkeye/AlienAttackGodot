@@ -10,6 +10,8 @@
 [X] Add help to main menu
 [X] make github action replace index.js to s/<script src="index.js">/<script src="index.js?m=timestamp">/
 [X] ~black background~
+[ ] make UFOs target between the two weapons(?)
+[ ] Position things based on viewport?
 
 Timer:
   can_shoot = true
