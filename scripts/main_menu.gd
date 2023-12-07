@@ -2,6 +2,9 @@ extends Control
 
 var MainScene = preload("res://scenes/main.tscn")
 
+func _ready():
+	$MarginContainer/HBoxContainer/VBoxContainer/Version.text = "Version: " + Version.versionHash
+	
 func _process(_delta):
 	pass
 

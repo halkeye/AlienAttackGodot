@@ -5,11 +5,11 @@ extends Node2D
 #@onready var ufos : Array[Node] = get_tree().get_nodes_in_group("ufos")
 
 var score = 0
+var level = 1
 
 @onready var screensize = get_viewport_rect().size
-
-@onready var scoreLabel = $"Score/Value"
-
+@onready var scoreLabel = $Score
+@onready var levelLabel = $Level
 func gen_random_pos():
 	var x = randf_range(60, screensize.x-60)
 	var y = randf_range(60, screensize.y / 2)
@@ -31,7 +31,9 @@ func _ready():
 
 func _process(_delta):
 	if scoreLabel:
-		scoreLabel.text = str(score)
+		scoreLabel.values = [score]
+	if levelLabel:
+		levelLabel.values = [level]
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton:
@@ -54,5 +56,5 @@ func _on_ufo_fire_timer_timeout():
 		$UFOTargetPath/PathFollow2D.progress_ratio = randf()
 		ufo.fire(bullet_scene, $UFOTargetPath/PathFollow2D.position)
 	
-func _on_ufo_health_depleted(ufo: UFO):
+func _on_ufo_health_depleted(_ufo: UFO):
 	score += 1
