@@ -1,15 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://g0jaoevp4k4b"]
+[gd_scene load_steps=5 format=3 uid="uid://g0jaoevp4k4b"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_ygm3h"]
 [ext_resource type="PackedScene" uid="uid://diqwmmt6lahvb" path="res://scenes/city.tscn" id="2_7k887"]
 [ext_resource type="PackedScene" uid="uid://cewvp34yjb0ko" path="res://scenes/components/label_value.tscn" id="3_4g6ch"]
 [ext_resource type="PackedScene" uid="uid://bqlch05ol3ig3" path="res://scenes/weapon.tscn" id="4_edgso"]
-
-[sub_resource type="Curve2D" id="Curve2D_3mooo"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 128, 576, 0, 0, 0, 0, 832, 576, 0, 0, 0, 0, 128, 576)
-}
-point_count = 3
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ygm3h")
@@ -28,9 +22,9 @@ offset_left = 16.0
 offset_top = 4.0
 offset_right = 91.0
 offset_bottom = 27.0
-text = "Score: 2"
-values = [2]
-label = "Score: %d"
+text = "Score: 2 / 0"
+values = [2, 0]
+label = "Score: %d / %d"
 
 [node name="City1" parent="." groups=["cities"] instance=ExtResource("2_7k887")]
 position = Vector2(182, 524)
@@ -47,12 +41,6 @@ scale = Vector2(2, 2)
 [node name="UFOFireTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
-
-[node name="UFOTargetPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_3mooo")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="UFOTargetPath"]
-position = Vector2(128, 576)
 
 [node name="Weapon" parent="." groups=["weapons"] instance=ExtResource("4_edgso")]
 offset_left = 16.0

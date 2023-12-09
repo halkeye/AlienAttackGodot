@@ -1,8 +1,6 @@
 extends Area2D
 class_name UFO
 
-var target_path : PathFollow2D
-
 @export_group("Health")
 @export var health: int = 1 : set=set_health
 @export var max_health:int = 1
@@ -16,12 +14,11 @@ signal health_depleted(ufo: UFO)
 var speed = 150
 var velocity = Vector2.ZERO
 
+ # wait 1 second before every 2 seconds
+var last_fire = -1
+
 # Called when the node enters the scene tree for the first time.
-func _ready():
-	if !target_path:
-		# for debugging
-		target_path = $DebugUFOTargetPath/PathFollow2D
-		
+func _ready():		
 	health = max_health
 	show_sprite($Ufo)
 	if randi_range(0, 1) == 0:
@@ -99,6 +96,5 @@ func _on_ufo_fire_timer_timeout():
 		
 	if is_on_fire():
 		return
-		
-	target_path.progress_ratio = randf()
-	fire(bullet_scene, target_path.position)
+	
+	fire(bullet_scene, Vector2(randf_range(0, screensize.x), screensize.y))

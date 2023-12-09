@@ -1,8 +1,6 @@
 extends Node2D
 class_name MainScene
 
-const UFOS_PER_LEVEL: int = 3
-
 var RoundSuccessScene = preload("res://scenes/round_success.tscn")
 
 @onready var screensize = get_viewport_rect().size
@@ -20,14 +18,13 @@ func create_ufo():
 	var ufo = preload("res://scenes/ufo.tscn").instantiate()
 	ufo.position = gen_random_pos()
 	ufo.scale = Vector2(2, 2)
-	ufo.target_path = $UFOTargetPath/PathFollow2D.duplicate()
 	ufo.add_to_group("ufos")
 	add_child(ufo)
 	
 func _ready():
 	request_ready()
 	
-	var num_ufos = UFOS_PER_LEVEL * Global.level
+	var num_ufos = Global.UFOS_PER_LEVEL * Global.level
 	print("Creating %d ufos" % [num_ufos])
 	for ufo_idx in num_ufos:
 		create_ufo()
@@ -39,7 +36,7 @@ func _ready():
 
 func _process(_delta):
 	if scoreLabel:
-		scoreLabel.values = [Global.score]
+		scoreLabel.values = [level_score, Global.score_goal(Global.level)]
 	if levelLabel:
 		levelLabel.values = [Global.level]
 
@@ -57,8 +54,7 @@ func _on_ufo_health_depleted(_ufo: UFO):
 	Global.score += 1
 
 func _on_score_change(change_amount: int):
-	var score_goal = Global.level * UFOS_PER_LEVEL
 	level_score += change_amount
 	
-	if level_score >= score_goal:
+	if level_score >= Global.score_goal(Global.level):
 		get_tree().change_scene_to_packed(RoundSuccessScene)
