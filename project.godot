@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Version="*res://scripts/version.gd"
+Global="*res://scripts/global.gd"
 
 [display]
 

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cabcp40j1bu8j"]
+
+[ext_resource type="Script" path="res://scripts/components/full_screen_image.gd" id="1_av73y"]
+
+[node name="FullScreenImage" type="Node"]
+script = ExtResource("1_av73y")

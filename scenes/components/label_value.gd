@@ -1,5 +1,5 @@
+@tool
 extends Label
-
 @export var values: Array = []
 @export var label: String = "" 
 

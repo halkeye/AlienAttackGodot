@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c6grofh2qvfjv"
-path="res://.godot/imported/Defeat.png-c9e8ea3da0a1297188ebcea50b3a6090.ctex"
+path="res://.godot/imported/RoundDefeat.png-fd23ba1a8c9c898492c157a941dc13ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://artwork/splash/Defeat.png"
-dest_files=["res://.godot/imported/Defeat.png-c9e8ea3da0a1297188ebcea50b3a6090.ctex"]
+source_file="res://artwork/splash/RoundDefeat.png"
+dest_files=["res://.godot/imported/RoundDefeat.png-fd23ba1a8c9c898492c157a941dc13ee.ctex"]
 
 [params]
 
