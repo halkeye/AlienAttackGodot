@@ -12,7 +12,7 @@
 [X] ~black background~
 [ ] make UFOs target between the two weapons(?)
 [ ] Position things based on viewport?
-[ ] Make UFOs have own firing timer, instead of firing one ufo in the scene
+[X] Make UFOs have own firing timer, instead of firing one ufo in the scene
 
 Timer:
   can_shoot = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dc24bqyqq7dn4"]
+[gd_scene load_steps=8 format=3 uid="uid://dc24bqyqq7dn4"]
 
 [ext_resource type="Script" path="res://scripts/ufo.gd" id="1_aav8l"]
 [ext_resource type="Texture2D" uid="uid://c6ucnqhk06606" path="res://sprites/ufo/ufo.png" id="2_adu61"]
@@ -9,6 +9,12 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_12iq2"]
 radius = 17.0
 height = 82.0
+
+[sub_resource type="Curve2D" id="Curve2D_8c5c7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 128, 576, 0, 0, 0, 0, 832, 576, 0, 0, 0, 0, 128, 576)
+}
+point_count = 3
 
 [node name="UFO" type="Area2D"]
 collision_layer = 2
@@ -40,5 +46,18 @@ visible = false
 position = Vector2(0, -1)
 texture = ExtResource("5_2u2yt")
 
+[node name="UFOFireTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="DebugUFOTargetPath" type="Path2D" parent="."]
+visible = false
+curve = SubResource("Curve2D_8c5c7")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="DebugUFOTargetPath"]
+visible = false
+position = Vector2(128, 576)
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="UFOFireTimer" to="." method="_on_ufo_fire_timer_timeout"]

@@ -13,6 +13,8 @@ enum GunType {
 @onready var widearea_gun_image = preload("res://sprites/weapons/wideareagun.png")
 @onready var zapper_gun_image = preload("res://sprites/weapons/zappergun.png")
 
+var bullet_scene = preload("res://scenes/bullet.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -32,7 +34,7 @@ func set_gun_type(type):
 		$".".set_texture_normal(zapper_gun_image)
 	gun_type = type
 				
-func fire(bullet_scene: PackedScene, pos: Vector2):
+func fire(pos: Vector2):
 	var bullet = bullet_scene.instantiate()
 	bullet.start($".".global_position, (pos - global_position).angle())
 	get_tree().root.add_child(bullet)

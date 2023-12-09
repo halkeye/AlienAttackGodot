@@ -1,8 +1,6 @@
 extends Node2D
 class_name MainScene
 
-@export var bullet_scene: PackedScene
-
 const UFOS_PER_LEVEL: int = 3
 
 var RoundSuccessScene = preload("res://scenes/round_success.tscn")
@@ -22,6 +20,7 @@ func create_ufo():
 	var ufo = preload("res://scenes/ufo.tscn").instantiate()
 	ufo.position = gen_random_pos()
 	ufo.scale = Vector2(2, 2)
+	ufo.target_path = $UFOTargetPath/PathFollow2D.duplicate()
 	ufo.add_to_group("ufos")
 	add_child(ufo)
 	
@@ -49,21 +48,10 @@ func _unhandled_input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				var mouse_position = get_global_mouse_position()
-				get_tree().call_group("weapons", "fire", bullet_scene, mouse_position)
+				get_tree().call_group("weapons", "fire", mouse_position)
 
 	if event.is_action_pressed("weapon_switch"):
 		get_tree().call_group("weapons", "next_weapon")
-
-func _on_ufo_fire_timer_timeout():
-	var ufos = get_tree().get_nodes_in_group("ufos")
-	if len(ufos) == 0:
-		## there should never be no ufos normally, but guard incase
-		return
-		
-	var ufo: UFO = ufos[randi_range(0, len(ufos)-1)]
-	if !ufo.is_dead():
-		$UFOTargetPath/PathFollow2D.progress_ratio = randf()
-		ufo.fire(bullet_scene, $UFOTargetPath/PathFollow2D.position)
 	
 func _on_ufo_health_depleted(_ufo: UFO):
 	Global.score += 1
@@ -72,6 +60,5 @@ func _on_score_change(change_amount: int):
 	var score_goal = Global.level * UFOS_PER_LEVEL
 	level_score += change_amount
 	
-
 	if level_score >= score_goal:
 		get_tree().change_scene_to_packed(RoundSuccessScene)
