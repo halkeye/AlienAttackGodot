@@ -50,6 +50,7 @@ theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/MarginContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 21
 bbcode_enabled = true
@@ -64,6 +65,34 @@ text = "[table=3]
 [/table]"
 fit_content = true
 shortcut_keys_enabled = false
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 3
+
+[node name="Key" type="Label" parent="VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Up/Down/Left/Right"
+
+[node name="Seperator" type="Label" parent="VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Switch Weapons"
+
+[node name="Key2" type="Label" parent="VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Touch/Click"
+
+[node name="Seperator2" type="Label" parent="VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="Description2" type="Label" parent="VBoxContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Fire Weapons"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
