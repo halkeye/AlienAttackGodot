@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://d388jsdulny51"]
+
+[ext_resource type="Texture2D" uid="uid://c6grofh2qvfjv" path="res://artwork/splash/RoundDefeat.png" id="1_7hp67"]
+
+[node name="RoundDefeat" type="Node2D"]
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+vertical = true
+
+[node name="RoundSuccess" type="Sprite2D" parent="BoxContainer"]
+position = Vector2(478, 320.5)
+scale = Vector2(1.912, 1.278)
+texture = ExtResource("1_7hp67")

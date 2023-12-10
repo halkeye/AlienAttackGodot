@@ -25,15 +25,8 @@ func _to_string():
 
 func _on_area_entered(area):
 	var hit_something = false
-	if area is UFO:
-		var ufo: UFO = area
-		if !ufo.is_dead():
-			hit_something = true
-			ufo.damage(damage)
-	if area is City:
-		var city: City = area
-		hit_something = true
-		city.damage(damage)	
+	if area.has_method("damage"):
+		hit_something = area.damage(damage)
 		
 	if hit_something:
 		queue_free()

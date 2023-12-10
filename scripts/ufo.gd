@@ -1,10 +1,6 @@
 extends Area2D
 class_name UFO
 
-@export_group("Health")
-@export var health: int = 1 : set=set_health
-@export var max_health:int = 1
-
 @onready var screensize = get_viewport_rect().size
 
 var bullet_scene = preload("res://scenes/bullet.tscn")
@@ -19,7 +15,6 @@ var last_fire = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():		
-	health = max_health
 	show_sprite($Ufo)
 	if randi_range(0, 1) == 0:
 		speed = -1 * speed 
@@ -37,20 +32,14 @@ func _process(delta):
 	position.x += delta * speed
 	pass
 	
-func set_health(value : int) -> void:
-	health = value
-	if (is_dead()):
-		show_sprite($Exploded)
+func damage(amount: int = 1) -> bool:
+	return $HealthComponent.damage(amount)
 	
-func damage(amount: int = 1):
-	# if no health yet, cant take damage
-	if health > 0:
-		health -= amount
-		if is_dead():
-			health_depleted.emit(self)
-
+func is_dead() -> bool:
+	return $HealthComponent.is_dead()
+	
 func fire(bullet_scene: PackedScene, pos: Vector2):
-	if is_dead():
+	if $HealthComponent.is_dead():
 		return
 		
 	var bullet = bullet_scene.instantiate() as Bullet
@@ -59,14 +48,11 @@ func fire(bullet_scene: PackedScene, pos: Vector2):
 	bullet.start(starting_pos, (pos - starting_pos).angle())
 	get_tree().root.add_child(bullet)
 	return bullet
-
-func is_dead():
-	return health <= 0
 	
 func reverse():
 	speed = -1 * speed 
 	velocity = Vector2(speed, 0)
-	if is_dead():
+	if $HealthComponent.is_dead():
 		queue_free()
 
 func set_on_fire():
@@ -91,10 +77,14 @@ func show_sprite(sprite: Sprite2D):
 	sprite.show()
 	
 func _on_ufo_fire_timer_timeout():
-	if is_dead():
+	if $HealthComponent.is_dead():
 		return
 		
 	if is_on_fire():
 		return
 	
 	fire(bullet_scene, Vector2(randf_range(0, screensize.x), screensize.y))
+
+func _on_health_component_health_depleted():
+	show_sprite($Exploded)
+	health_depleted.emit(self)

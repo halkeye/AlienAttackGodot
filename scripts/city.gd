@@ -1,29 +1,26 @@
 extends Area2D
 class_name City
 
-@export_group("Health")
-@export var health: int = 1 : set=set_health
-@export var max_health:int = 1
-
 @export_group("Images")
 @export var full_health_image = preload("res://sprites/city/City.png")
 @export var dead_image = preload("res://sprites/city/CityDie.png")
 
+signal health_depleted(city: City)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	health = max_health
 	$Sprite.set_texture(full_health_image)
-	
-func set_health(value : int) -> void:
-	health = value
-	if (health <= 0):
-		$Sprite.set_texture(dead_image)
-		health = 0
-	else:
-		$Sprite.set_texture(full_health_image)
 		
-func damage(amount: int = 1):
-	health -= amount
+func damage(amount: int = 1) -> bool:
+	$HealthComponent.damage(amount)
+	return true
 
 func _process(_delta):
 	pass
+
+func _on_health_component_health_depleted():
+	$Sprite.set_texture(dead_image)
+	health_depleted.emit(self)
+	
+func is_dead() -> bool:
+	return $HealthComponent.is_dead()

@@ -2,6 +2,7 @@ extends Node2D
 class_name MainScene
 
 var RoundSuccessScene = preload("res://scenes/round_success.tscn")
+var RoundDefeatScene = preload("res://scenes/round_defeat.tscn")
 
 @onready var screensize = get_viewport_rect().size
 @onready var scoreLabel = $Score
@@ -32,6 +33,9 @@ func _ready():
 	for ufo in get_tree().get_nodes_in_group("ufos"):
 		ufo.health_depleted.connect(_on_ufo_health_depleted)
 		
+	for city in get_tree().get_nodes_in_group("cities"):
+		city.health_depleted.connect(_on_city_health_depleted)
+		
 	Global.delta_score.connect(_on_score_change)
 
 func _process(_delta):
@@ -52,7 +56,15 @@ func _unhandled_input(event):
 	
 func _on_ufo_health_depleted(_ufo: UFO):
 	Global.score += 1
-
+	
+func _on_city_health_depleted(_city: City):
+	var cities_alive = false
+	for city in get_tree().get_nodes_in_group("cities"):
+		if !city.is_dead():
+			cities_alive = true
+	if !cities_alive:
+		get_tree().change_scene_to_packed(RoundDefeatScene)
+	
 func _on_score_change(change_amount: int):
 	level_score += change_amount
 	

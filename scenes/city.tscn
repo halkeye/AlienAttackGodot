@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://diqwmmt6lahvb"]
+[gd_scene load_steps=5 format=3 uid="uid://diqwmmt6lahvb"]
 
 [ext_resource type="Script" path="res://scripts/city.gd" id="1_2h8wi"]
 [ext_resource type="Texture2D" uid="uid://5rr4fhfeon6k" path="res://sprites/city/City.png" id="2_rgoir"]
+[ext_resource type="PackedScene" uid="uid://bomdoabrv0eno" path="res://scenes/components/health_component.tscn" id="3_7dtcg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vw8vn"]
 size = Vector2(74, 42)
@@ -18,3 +19,7 @@ centered = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(35, 35)
 shape = SubResource("RectangleShape2D_vw8vn")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_7dtcg")]
+
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_component_health_depleted"]
