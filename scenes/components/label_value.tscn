@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cewvp34yjb0ko"]
 
-[ext_resource type="Script" path="res://scenes/components/label_value.gd" id="1_0hpc3"]
+[ext_resource type="Script" path="res://scripts/components/label_value.gd" id="1_0hpc3"]
 
 [node name="Level" type="Label"]
 text = "%s: %s"
