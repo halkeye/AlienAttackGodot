@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dd13pp2qey8s8"]
+
+[ext_resource type="Script" path="res://scenes/test/line_2d.gd" id="1_momw5"]
+[ext_resource type="Shader" path="res://shaders/line2d_wiggler.gdshader" id="1_trra1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eq5xf"]
+shader = ExtResource("1_trra1")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_45vyj"]
+load_path = "res://.godot/imported/spark_06_rotated.png-08a787283c0de7b186561d01daabc915.ctex"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e5g5i"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 50, 1)
+angle_min = 25.0
+angle_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qvq8j"]
+load_path = "res://.godot/imported/spark_05.png-2afab01ea5fcd6c97abe2cdb72b038d8.ctex"
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_momw5")
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_eq5xf")
+position = Vector2(-64, -256)
+scale = Vector2(0.252213, 0.470456)
+points = PackedVector2Array(632, 808, 1681.12, 816.229, 1848, 632, 2168, 1192, 1280, 1544, 288, 1600)
+width = 150.0
+texture = SubResource("CompressedTexture2D_45vyj")
+texture_mode = 1
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(104, 104)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_e5g5i")
+texture = SubResource("CompressedTexture2D_qvq8j")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.4
+randomness = 0.4
