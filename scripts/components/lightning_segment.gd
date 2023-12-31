@@ -1,5 +1,5 @@
 extends Line2D
-class_name Lightning
+class_name LightningSegment
 
 # Borrowed from https://www.youtube.com/watch?v=Hyq7KixGyHY
 

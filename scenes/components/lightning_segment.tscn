@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://hr5yl3a1c3vo"]
 
-[ext_resource type="Script" path="res://scripts/components/lightning.gd" id="1_b44pp"]
+[ext_resource type="Script" path="res://scripts/components/lightning_segment.gd" id="1_pp2su"]
 
 [sub_resource type="Gradient" id="Gradient_vjxjm"]
 
@@ -85,7 +85,7 @@ gradient = SubResource("Gradient_vjxjm")
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
-script = ExtResource("1_b44pp")
+script = ExtResource("1_pp2su")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
