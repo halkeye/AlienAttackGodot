@@ -38,7 +38,7 @@ func damage(amount: int = 1) -> bool:
 func is_dead() -> bool:
 	return $HealthComponent.is_dead()
 	
-func fire(bullet_scene: PackedScene, pos: Vector2):
+func fire(pos: Vector2):
 	if $HealthComponent.is_dead():
 		return
 		
@@ -83,7 +83,7 @@ func _on_ufo_fire_timer_timeout():
 	if is_on_fire():
 		return
 	
-	fire(bullet_scene, Vector2(randf_range(0, screensize.x), screensize.y))
+	fire(Vector2(randf_range(0, screensize.x), screensize.y))
 
 func _on_health_component_health_depleted():
 	show_sprite($Exploded)

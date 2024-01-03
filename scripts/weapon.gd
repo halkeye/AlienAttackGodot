@@ -8,11 +8,10 @@ enum GunType {
 }
 @export var gun_type: GunType = GunType.BASIC : set=set_gun_type
 
-@onready var basic_gun_image = preload("res://sprites/weapons/Basic Gun.png")
-@onready var firestorm_gun_image = preload("res://sprites/weapons/firestormgun.png")
-@onready var widearea_gun_image = preload("res://sprites/weapons/wideareagun.png")
-@onready var zapper_gun_image = preload("res://sprites/weapons/zappergun.png")
-
+var basic_gun_image = preload("res://sprites/weapons/Basic Gun.png")
+var firestorm_gun_image = preload("res://sprites/weapons/firestormgun.png")
+var widearea_gun_image = preload("res://sprites/weapons/wideareagun.png")
+var zapper_gun_image = preload("res://sprites/weapons/zappergun.png")
 var bullet_scene = preload("res://scenes/bullet.tscn")
 
 # Called when the node enters the scene tree for the first time.
@@ -34,11 +33,26 @@ func set_gun_type(type):
 		$".".set_texture_normal(zapper_gun_image)
 	gun_type = type
 				
-func fire(pos: Vector2):
+func fire(pos: Vector2) -> void:
+	var start_pos = $".".global_position
 	var bullet = bullet_scene.instantiate()
-	bullet.start($".".global_position, (pos - global_position).angle())
-	get_tree().root.add_child(bullet)
-	return bullet
+	print(pos)
+	if gun_type == GunType.ZAPPER:
+		$LightningGenerator.generate(get_parent(), start_pos, pos)
+		# create the bullet
+		bullet.position = pos
+		bullet.visible = false
+		get_parent().add_child(bullet)
+		# let it collide
+		await get_parent().get_tree().physics_frame 
+		# well twice, so it actually collides
+		await get_parent().get_tree().physics_frame 
+		# remove it
+		bullet.call_deferred("queue_free")
+		return
+	
+	bullet.start(start_pos, (pos - start_pos).angle())
+	get_parent().add_child(bullet)
 
 func next_weapon(): 
 	if gun_type == GunType.BASIC:

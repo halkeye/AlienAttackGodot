@@ -1,8 +1,9 @@
 extends Node2D
 class_name MainScene
 
-var RoundSuccessScene = preload("res://scenes/round_success.tscn")
-var RoundDefeatScene = preload("res://scenes/round_defeat.tscn")
+var round_success_scene = preload("res://scenes/round_success.tscn")
+var round_defeat_scene = preload("res://scenes/round_defeat.tscn")
+var ufo_scene = preload("res://scenes/ufo.tscn")
 
 @onready var screensize = get_viewport_rect().size
 @onready var scoreLabel = $Score
@@ -16,7 +17,7 @@ func gen_random_pos():
 	return Vector2(x, y)
 	
 func create_ufo():
-	var ufo = preload("res://scenes/ufo.tscn").instantiate()
+	var ufo = ufo_scene.instantiate()
 	ufo.position = gen_random_pos()
 	ufo.scale = Vector2(2, 2)
 	ufo.add_to_group("ufos")
@@ -63,10 +64,10 @@ func _on_city_health_depleted(_city: City):
 		if !city.is_dead():
 			cities_alive = true
 	if !cities_alive:
-		get_tree().change_scene_to_packed(RoundDefeatScene)
+		get_tree().change_scene_to_packed(round_defeat_scene)
 	
 func _on_score_change(change_amount: int):
 	level_score += change_amount
 	
 	if level_score >= Global.score_goal(Global.level):
-		get_tree().change_scene_to_packed(RoundSuccessScene)
+		get_tree().change_scene_to_packed(round_success_scene)

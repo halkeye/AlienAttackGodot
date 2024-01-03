@@ -3,7 +3,7 @@ class_name LightingGenerator
 
 var lighting_segment_scene : PackedScene = preload("res://scenes/components/lightning_segment.tscn")
 
-func generate(start_pos: Vector2, end_pos: Vector2):
+func generate(container: Node2D, start_pos: Vector2, end_pos: Vector2):
 	var fork_count = 1
 
 	var from_to: Vector2
@@ -21,7 +21,7 @@ func generate(start_pos: Vector2, end_pos: Vector2):
 			target = (start_pos + normal * randf_range(-fork_offset, fork_offset)) * length_offset
 		from_to = target - start_pos
 		normal = Vector2(from_to.y, -from_to.x).normalized()
-		add_child(lighting_segment_instance)
+		container.add_child(lighting_segment_instance)
 		lighting_segment_instance.set_start(start_pos)
 		lighting_segment_instance.set_end(target)
 		lighting_segment_instance.segmentize(from_to, start_pos)

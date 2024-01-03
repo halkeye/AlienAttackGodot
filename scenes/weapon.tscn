@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bqlch05ol3ig3"]
+[gd_scene load_steps=4 format=3 uid="uid://bqlch05ol3ig3"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_vchuq"]
 [ext_resource type="Texture2D" uid="uid://ciao30641xgpe" path="res://sprites/weapons/Basic Gun.png" id="1_y6p8q"]
+[ext_resource type="PackedScene" uid="uid://7uny7jhti6ok" path="res://scenes/components/lightning_generator.tscn" id="3_p4e0m"]
 
 [node name="Weapon" type="TextureButton"]
 offset_left = -24.0
@@ -12,5 +13,7 @@ mouse_default_cursor_shape = 2
 action_mode = 0
 texture_normal = ExtResource("1_y6p8q")
 script = ExtResource("1_vchuq")
+
+[node name="LightningGenerator" parent="." instance=ExtResource("3_p4e0m")]
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
