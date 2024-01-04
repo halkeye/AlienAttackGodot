@@ -36,19 +36,18 @@ func set_gun_type(type):
 func fire(pos: Vector2) -> void:
 	var start_pos = $".".global_position
 	var bullet = bullet_scene.instantiate()
-	print(pos)
+
 	if gun_type == GunType.ZAPPER:
-		$LightningGenerator.generate(get_parent(), start_pos, pos)
+		var generator = $LightningGenerator.duplicate()
+		var on_done = func():
+			if bullet != null: # no collision
+				bullet.call_deferred("queue_free")
+		generator.lightning_done.connect(on_done)
+		generator.generate(get_parent(), start_pos, pos)
 		# create the bullet
 		bullet.position = pos
 		bullet.visible = false
 		get_parent().add_child(bullet)
-		# let it collide
-		await get_parent().get_tree().physics_frame 
-		# well twice, so it actually collides
-		await get_parent().get_tree().physics_frame 
-		# remove it
-		bullet.call_deferred("queue_free")
 		return
 	
 	bullet.start(start_pos, (pos - start_pos).angle())

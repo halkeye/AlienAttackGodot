@@ -1,6 +1,8 @@
 extends Line2D
 class_name LightningSegment
 
+signal lightning_done
+
 # Borrowed from https://www.youtube.com/watch?v=Hyq7KixGyHY
 
 @onready var anim_player : AnimationPlayer = $AnimationPlayer
@@ -39,3 +41,7 @@ func swayize(normal: Vector2) -> void:
 		else:
 			var offset = ((get_point_position (point) + get_point_position (point - 1))/2) + normal * randf_range(-sway, sway)
 			set_point_position (point, offset)
+
+func done() -> void:
+	lightning_done.emit()
+	queue_free()
