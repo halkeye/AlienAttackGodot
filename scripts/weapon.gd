@@ -58,12 +58,18 @@ func fire(pos: Vector2) -> void:
 	if gun_type == GunType.BASIC:
 		$BasicGunSoundPlayer.seek(0.0)
 		$BasicGunSoundPlayer.play()
-		
+	if gun_type == GunType.FIRESTORM:
+		$FirestormSoundPlayer.seek(0.0)
+		$FirestormSoundPlayer.play()
+	if gun_type == GunType.WIDEAREA:
+		$WideAreaSoundPlayer.seek(0.0)
+		$WideAreaSoundPlayer.play()
+			
 	bullet.start(start_pos, (pos - start_pos).angle())
 	get_parent().add_child(bullet)
 
 func is_fireing() -> bool:
-	return $LightingSoundPlayer.playing || $BasicGunSoundPlayer.playing
+	return $LightingSoundPlayer.playing || $BasicGunSoundPlayer.playing ||$WideAreaSoundPlayer.playing || $FirestormSoundPlayer.playing
 	
 func next_weapon(): 
 	if gun_type == GunType.BASIC:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqlch05ol3ig3"]
+[gd_scene load_steps=7 format=3 uid="uid://bqlch05ol3ig3"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_vchuq"]
 [ext_resource type="Texture2D" uid="uid://ciao30641xgpe" path="res://sprites/weapons/Basic Gun.png" id="1_y6p8q"]
 [ext_resource type="PackedScene" uid="uid://7uny7jhti6ok" path="res://scenes/components/lightning_generator.tscn" id="3_p4e0m"]
 [ext_resource type="AudioStream" uid="uid://hnrp0gxq6hss" path="res://sounds/143565__yvessch__zap.mp3" id="4_8fnb4"]
 [ext_resource type="AudioStream" uid="uid://i661pmlw30p0" path="res://sounds/184651__isaac200000__cannon5.wav" id="5_rowje"]
+[ext_resource type="AudioStream" uid="uid://dac77vj3twtey" path="res://sounds/267887__wjl__short-fireball-woosh.mp3" id="6_fnx42"]
 
 [node name="Weapon" type="TextureButton"]
 offset_left = -24.0
@@ -25,5 +26,10 @@ pitch_scale = 3.0
 [node name="BasicGunSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_rowje")
 volume_db = 0.25
+
+[node name="WideAreaSoundPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="FirestormSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_fnx42")
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
