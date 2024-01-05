@@ -34,6 +34,10 @@ func set_gun_type(type):
 	gun_type = type
 				
 func fire(pos: Vector2) -> void:
+	if is_fireing():
+		# can't fire while firing
+		return
+		
 	var start_pos = $".".global_position
 	var bullet = bullet_scene.instantiate()
 
@@ -48,11 +52,19 @@ func fire(pos: Vector2) -> void:
 		bullet.position = pos
 		bullet.visible = false
 		get_parent().add_child(bullet)
+		$LightingSoundPlayer.seek(0.0)
+		$LightingSoundPlayer.play()
 		return
-	
+	if gun_type == GunType.BASIC:
+		$BasicGunSoundPlayer.seek(0.0)
+		$BasicGunSoundPlayer.play()
+		
 	bullet.start(start_pos, (pos - start_pos).angle())
 	get_parent().add_child(bullet)
 
+func is_fireing() -> bool:
+	return $LightingSoundPlayer.playing || $BasicGunSoundPlayer.playing
+	
 func next_weapon(): 
 	if gun_type == GunType.BASIC:
 		gun_type = GunType.FIRESTORM

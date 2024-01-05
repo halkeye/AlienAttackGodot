@@ -37,7 +37,6 @@ func generate(container: Node2D, start_pos: Vector2, end_pos: Vector2) -> void:
 
 func done() -> void:
 	segment_count -= 1
-	print("yo %d" % segment_count)
 	if segment_count == 0:
 		lightning_done.emit()
 	return
