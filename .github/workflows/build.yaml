@@ -55,6 +55,9 @@ jobs:
           godot -v --headless --export-debug "linux"
           godot -v --headless --export-debug "mac"
 
+      - name: Debug
+        run: find
+
       - name: Borrow enable-threads script
         run: wget -O build/web/coi-serviceworker.min.js https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/master/coi-serviceworker.min.js
 
