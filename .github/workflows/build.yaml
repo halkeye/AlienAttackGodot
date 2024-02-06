@@ -1,5 +1,8 @@
 name: "godot-ci export"
-on: push
+on:
+  push:
+    branches:
+      - main
 
 concurrency:
   group: ${{ github.workflow }}
@@ -7,73 +10,79 @@ concurrency:
 env:
   GODOT_VERSION: 4.2
   EXPORT_NAME: AlienAttack
+  BUTLER_CREDENTIALS: "${{ secrets.BUTLER_API_KEY }}"
+  ITCH_GAME: alien-attack
+  ITCH_USER: halkeye
 
 jobs:
-  export:
-    name: ${{ matrix.platform }} Export
-    runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        platform:
-          - linux
-          - windows
-          - mac
-          - web
+  build-and-publish:
+    name: Build and Publish
+    permissions:
+      contents: read
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    runs-on: ubuntu-latest
     container:
-      image: barichello/godot-ci:4.2
+      image: barichello/godot-ci:4.2.1
+    environment:
+      name: github-pages
+      url: https://halkeye.itch.io/alien-attack
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           lfs: false
+
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/templates
           mv /root/.local/share/godot/templates/ ~/.local/share/godot/export_templates/
-      - name: Build
+
+      - name: Remove .godot
+        run:
+          find -name .godot -exec rm -rf {} \;
+
+      - name: Set Version
+        working-directory: 'godotproject'
         run: |
-          mkdir -v -p build/${{ matrix.platform }}
-          godot -v --headless --export-release "${{ matrix.platform }}"
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: ${{ matrix.platform }}
-          path: build/${{ matrix.platform }}
+          sed -i 's|Version: 1.0.0|Version: 1.0.0.${{ github.sha }}|g' scenes/main_menu.tscn
 
-  publish-web:
-    name: Publish web
-    needs:
-      - export
-    permissions:
-      pages: write      # to deploy to Pages
-      id-token: write   # to verify the deployment originates from an appropriate source
-    runs-on: ubuntu-22.04
-    # Deploy to the github-pages environment
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-#      - uses: actions/checkout@v3
-
-      - uses: actions/download-artifact@v3
-        with:
-          name: web
-          path: _site
+      - name: Build
+        working-directory: 'godotproject'
+        run: |
+          mkdir -v -p build/{windows,linux,mac,web}
+          timeout 60 godot --headless --editor --quit
+          godot -v --headless --export-debug "web"
+          godot -v --headless --export-debug "windows"
+          godot -v --headless --export-debug "linux"
+          godot -v --headless --export-debug "mac"
 
       - name: Borrow enable-threads script
-        run: curl https://raw.githubusercontent.com/josephrocca/clip-image-sorter/92b108dc670d0b56bd6b72963b0e86c4c862412e/enable-threads.js --output _site/enable-threads.js
+        working-directory: 'godotproject'
+        run: wget -O build/web/coi-serviceworker.min.js https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/master/coi-serviceworker.min.js
 
       - name: Preload threads script
+        working-directory: 'godotproject'
         run: |-
-          sed -i 's|headers.set("Cross-Origin-Embedder-Policy", "credentialless")|headers.set("Cross-Origin-Embedder-Policy", "require-corp")|g'  _site/enable-threads.js
-          sed -i 's|<script src="index.js?m=${{ github.sha }}"></script>|<script src="enable-threads.js"></script><script src="index.js"></script>|g' _site/index.html
+          sed -i 's|<script src="index.js"></script>|<script src="coi-serviceworker.min.js"></script><script src="index.js?m=${{ github.sha }}"></script>|g' build/web/index.html
 
-      - name: Debug
-        run: find
+      - uses: manleydev/butler-publish-itchio-action@master
+        env:
+          CHANNEL: windows
+          PACKAGE: godotproject/build/windows
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v2
+      - uses: manleydev/butler-publish-itchio-action@master
+        env:
+          CHANNEL: web
+          PACKAGE: godotproject/build/web
 
-      - name: Deploy to GitHub Pages 🚀
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - uses: manleydev/butler-publish-itchio-action@master
+        env:
+          CHANNEL: linux
+          PACKAGE: godotproject/build/linux
+
+      - uses: manleydev/butler-publish-itchio-action@master
+        env:
+          CHANNEL: mac
+          PACKAGE: godotproject/build/mac
+
