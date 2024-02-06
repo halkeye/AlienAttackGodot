@@ -21,7 +21,7 @@ jobs:
       contents: read
       pages: write      # to deploy to Pages
       id-token: write   # to verify the deployment originates from an appropriate source
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     container:
       image: barichello/godot-ci:4.2.1
     environment:
@@ -48,12 +48,12 @@ jobs:
 
       - name: Build
         run: |
-          mkdir -v -p build/{windows,linux,mac,web}
+          set -euxo pipefail
           timeout 60 godot --headless --editor --quit
-          godot -v --headless --export-debug "web"
-          godot -v --headless --export-debug "windows"
-          godot -v --headless --export-debug "linux"
-          godot -v --headless --export-debug "mac"
+          for type in web windows linux mac; do
+            mkdir -v -p build/${type}
+            godot -v --headless --export-debug "${type}"
+          done
 
       - name: Debug
         run: find
