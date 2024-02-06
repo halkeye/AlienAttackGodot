@@ -48,7 +48,7 @@ jobs:
 
       - name: Build
         run: |
-          set -euxo pipefail
+          set -eux
           timeout 60 godot --headless --editor --quit
           for type in web windows linux mac; do
             mkdir -v -p build/${type}
