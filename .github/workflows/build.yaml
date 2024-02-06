@@ -43,12 +43,10 @@ jobs:
           find -name .godot -exec rm -rf {} \;
 
       - name: Set Version
-        working-directory: 'godotproject'
         run: |
           sed -i 's|Version: 1.0.0|Version: 1.0.0.${{ github.sha }}|g' scenes/main_menu.tscn
 
       - name: Build
-        working-directory: 'godotproject'
         run: |
           mkdir -v -p build/{windows,linux,mac,web}
           timeout 60 godot --headless --editor --quit
@@ -58,31 +56,29 @@ jobs:
           godot -v --headless --export-debug "mac"
 
       - name: Borrow enable-threads script
-        working-directory: 'godotproject'
         run: wget -O build/web/coi-serviceworker.min.js https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/master/coi-serviceworker.min.js
 
       - name: Preload threads script
-        working-directory: 'godotproject'
         run: |-
           sed -i 's|<script src="index.js"></script>|<script src="coi-serviceworker.min.js"></script><script src="index.js?m=${{ github.sha }}"></script>|g' build/web/index.html
 
       - uses: manleydev/butler-publish-itchio-action@master
         env:
           CHANNEL: windows
-          PACKAGE: godotproject/build/windows
+          PACKAGE: build/windows
 
       - uses: manleydev/butler-publish-itchio-action@master
         env:
           CHANNEL: web
-          PACKAGE: godotproject/build/web
+          PACKAGE: build/web
 
       - uses: manleydev/butler-publish-itchio-action@master
         env:
           CHANNEL: linux
-          PACKAGE: godotproject/build/linux
+          PACKAGE: build/linux
 
       - uses: manleydev/butler-publish-itchio-action@master
         env:
           CHANNEL: mac
-          PACKAGE: godotproject/build/mac
+          PACKAGE: build/mac
 
