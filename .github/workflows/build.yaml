@@ -44,7 +44,7 @@ jobs:
 
       - name: Set Version
         run: |
-          sed -i 's|Version: 1.0.0|Version: 1.0.0.${{ github.sha }}|g' scenes/main_menu.tscn
+          find -name '*.gd' -exec sed -i 's|%versionHash%|${{ github.sha }}|g' {} \;
 
       - name: Build
         run: |
