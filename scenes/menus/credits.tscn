@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=3 uid="uid://deaqc3qja2vru"]
+
+[ext_resource type="Script" path="res://scenes/menus/credits.gd" id="1_u63xq"]
+[ext_resource type="Script" path="res://addons/markdownlabel/markdownlabel.gd" id="2_clt84"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h1_format.gd" id="3_hbs8u"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h2_format.gd" id="4_tcvnn"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h3_format.gd" id="5_6ybcw"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h4_format.gd" id="6_lof8n"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h5_format.gd" id="7_3bcbe"]
+[ext_resource type="Script" path="res://addons/markdownlabel/header_formats/h6_format.gd" id="8_acbnb"]
+
+[sub_resource type="SystemFont" id="SystemFont_bhngf"]
+font_names = PackedStringArray("Serif")
+
+[sub_resource type="Resource" id="Resource_ejqex"]
+resource_local_to_scene = true
+script = ExtResource("3_hbs8u")
+font_size = 2.285
+is_bold = false
+is_italic = false
+is_underlined = false
+font_color = Color(0, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_nsfv8"]
+resource_local_to_scene = true
+script = ExtResource("4_tcvnn")
+font_size = 1.714
+is_bold = false
+is_italic = false
+is_underlined = false
+font_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Resource" id="Resource_alwyj"]
+resource_local_to_scene = true
+script = ExtResource("5_6ybcw")
+font_size = 1.428
+is_bold = false
+is_italic = false
+is_underlined = false
+font_color = null
+
+[sub_resource type="Resource" id="Resource_i06br"]
+resource_local_to_scene = true
+script = ExtResource("6_lof8n")
+font_size = 1.142
+is_bold = false
+is_italic = false
+is_underlined = false
+font_color = null
+
+[sub_resource type="Resource" id="Resource_subdb"]
+resource_local_to_scene = true
+script = ExtResource("7_3bcbe")
+font_size = 1.0
+is_bold = false
+is_italic = false
+is_underlined = false
+font_color = null
+
+[sub_resource type="Resource" id="Resource_vfssr"]
+resource_local_to_scene = true
+script = ExtResource("8_acbnb")
+font_size = 0.857
+is_bold = false
+is_italic = false
+is_underlined = false
+font_color = null
+
+[node name="Credits" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_u63xq")
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="CreditsContainer" type="Control" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarkdownLabel" type="RichTextLabel" parent="MarginContainer/CreditsContainer"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 1272.0
+offset_bottom = 720.0
+theme_override_fonts/normal_font = SubResource("SystemFont_bhngf")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+shortcut_keys_enabled = false
+script = ExtResource("2_clt84")
+h1 = SubResource("Resource_ejqex")
+h2 = SubResource("Resource_nsfv8")
+h3 = SubResource("Resource_alwyj")
+h4 = SubResource("Resource_i06br")
+h5 = SubResource("Resource_subdb")
+h6 = SubResource("Resource_vfssr")

@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="AlienAttack"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://scenes/menus/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/image="res://artwork/splash/SplashRemastered.png"
-config/icon="res://icon.svg"
+config/icon="res://artwork/splash/remastered.png"
 
 [autoload]
 
@@ -27,6 +27,10 @@ window/size/viewport_width=960
 window/size/viewport_height=640
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/markdownlabel/plugin.cfg")
 
 [input]
 

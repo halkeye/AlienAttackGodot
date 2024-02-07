@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmsytgwfctvlm"]
 
-[ext_resource type="Script" path="res://scripts/help_dialog.gd" id="1_v5d5t"]
+[ext_resource type="Script" path="res://scenes/menus/help_dialog.gd" id="1_v5d5t"]
 [ext_resource type="Texture2D" uid="uid://bpkxurlkcw70c" path="res://sprites/help/Keyboard Extras.png" id="2_xsv66"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6i45g"]

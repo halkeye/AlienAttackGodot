@@ -4,8 +4,11 @@ var current_scene = null
 
 signal delta_score(score: int)
 
-@export var score = 0 : set=set_score
-@export var level = 1
+@onready var MUSIC_BUS_IDX = AudioServer.get_bus_index("Music")
+@onready var SFX_BUS_IDX = AudioServer.get_bus_index("SFX")
+
+var score = 0 : set=set_score
+var level = 1
 
 const UFOS_PER_LEVEL: int = 3
 
