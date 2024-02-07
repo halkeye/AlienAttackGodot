@@ -22,14 +22,18 @@ script = ExtResource("1_vchuq")
 [node name="LightingSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_8fnb4")
 pitch_scale = 3.0
+bus = &"SFX"
 
 [node name="BasicGunSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_rowje")
 volume_db = 0.25
+bus = &"SFX"
 
 [node name="WideAreaSoundPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"SFX"
 
 [node name="FirestormSoundPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_fnx42")
+bus = &"SFX"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
