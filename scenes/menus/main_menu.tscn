@@ -57,7 +57,7 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Credits"
 
-[node name="Version" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Version" type="LinkButton" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Version: 1.0.0

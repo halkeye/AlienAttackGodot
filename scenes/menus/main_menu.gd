@@ -5,10 +5,8 @@ var SettingsScene = preload("res://scenes/menus/settings_menu.tscn")
 
 func _ready():
 	UserPreferences.load_or_create().setup_audio_busses()
-	%Version.text = "Version: " + Version.versionHash
-	
-func _process(_delta):
-	pass
+	%Version.text = "Version: " + Version.versionHash.substr(0, 6)
+	%Version.uri = "https://github.com/halkeye/AlienAttackGodot/tree/" + Version.versionHash.uri_encode()
 
 func _on_new_game_pressed():
 	get_tree().change_scene_to_packed(MainScene)
