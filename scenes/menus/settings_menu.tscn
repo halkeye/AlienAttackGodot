@@ -46,18 +46,17 @@ text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
-visible = false
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/MasterVolumeContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "Music Volume
 "
 
-[node name="MusicVolumeSlider" type="HSlider" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MasterVolumeSlider" type="HSlider" parent="ColorRect/MarginContainer/VBoxContainer/MasterVolumeContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -65,7 +64,33 @@ size_flags_vertical = 1
 max_value = 1.0
 step = 0.01
 
-[node name="MusicVolumeSliderLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="MasterVolumeSliderLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/MasterVolumeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "80%
+"
+
+[node name="MusicVolumeContainer2" type="HBoxContainer" parent="ColorRect/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/MusicVolumeContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Music Volume
+"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="ColorRect/MarginContainer/VBoxContainer/MusicVolumeContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 1.0
+step = 0.01
+
+[node name="MusicVolumeSliderLabel" type="Label" parent="ColorRect/MarginContainer/VBoxContainer/MusicVolumeContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
@@ -141,7 +166,8 @@ bus = &"Music"
 stream = ExtResource("3_pnkvr")
 bus = &"SFX"
 
-[connection signal="value_changed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer/MusicVolumeSlider" to="." method="_music_value_changed"]
+[connection signal="value_changed" from="ColorRect/MarginContainer/VBoxContainer/MasterVolumeContainer/MasterVolumeSlider" to="." method="_master_value_changed"]
+[connection signal="value_changed" from="ColorRect/MarginContainer/VBoxContainer/MusicVolumeContainer2/MusicVolumeSlider" to="." method="_music_value_changed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer2/MusicButton" to="." method="_on_music_button_pressed"]
 [connection signal="value_changed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer3/SFXVolumeSlider" to="." method="_sfx_value_changed"]
 [connection signal="pressed" from="ColorRect/MarginContainer/VBoxContainer/HBoxContainer4/SFXButton" to="." method="_on_sfx_button_pressed"]

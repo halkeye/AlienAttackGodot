@@ -4,9 +4,6 @@ var current_scene = null
 
 signal delta_score(score: int)
 
-@onready var MUSIC_BUS_IDX = AudioServer.get_bus_index("Music")
-@onready var SFX_BUS_IDX = AudioServer.get_bus_index("SFX")
-
 var score = 0 : set=set_score
 var level = 1
 
