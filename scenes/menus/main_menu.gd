@@ -1,7 +1,7 @@
 extends Control
 
-var MainScene = preload("res://scenes/main.tscn")
-var SettingsScene = preload("res://scenes/menus/settings_menu.tscn")
+var _main_scene = preload("res://scenes/main.tscn") as PackedScene
+var _settings_scene = preload("res://scenes/menus/settings_menu.tscn") as PackedScene
 
 func _ready():
 	UserPreferences.load_or_create().setup_audio_busses()
@@ -9,7 +9,12 @@ func _ready():
 	%Version.uri = "https://github.com/halkeye/AlienAttackGodot/tree/" + Version.versionHash.uri_encode()
 
 func _on_new_game_pressed():
-	get_tree().change_scene_to_packed(MainScene)
+	#var instantiated_scene = _main_scene.instantiate() as MainScene
+	#instantiated_scene.score = 10
+	#instantiated_scene.level = 12
+	#var packed_scene: PackedScene = PackedScene.new()
+	#packed_scene.pack(instantiated_scene)
+	get_tree().change_scene_to_packed(_main_scene)
 	
 func _on_how_to_play_pressed():
 	$"How To Play".show()
@@ -18,7 +23,7 @@ func _on_how_to_play_on_close():
 	$"How To Play".hide()
 
 func _on_settings_pressed():
-	var settings_menu = SettingsScene.instantiate()
+	var settings_menu = _settings_scene.instantiate()
 	get_tree().get_root().add_child(settings_menu)
 	var done_settings := func():
 		settings_menu.queue_free()

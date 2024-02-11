@@ -56,4 +56,5 @@ offset_right = 904.0
 offset_bottom = 575.0
 scale = Vector2(2, 2)
 
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
 [connection signal="timeout" from="UFOFireTimer" to="." method="_on_ufo_fire_timer_timeout"]

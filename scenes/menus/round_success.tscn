@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://holkv76xoupg"]
 
-[ext_resource type="Script" path="res://scripts/round_success.gd" id="1_wobga"]
+[ext_resource type="Script" path="res://scenes/menus/round_success.gd" id="1_wobga"]
 [ext_resource type="Texture2D" uid="uid://dpnw0saugdqdv" path="res://artwork/splash/RoundSuccess.png" id="1_y7oms"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_en71i"]
