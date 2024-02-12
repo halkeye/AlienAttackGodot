@@ -1,8 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://d388jsdulny51"]
+[gd_scene load_steps=4 format=3 uid="uid://d388jsdulny51"]
 
 [ext_resource type="Texture2D" uid="uid://c6grofh2qvfjv" path="res://artwork/splash/RoundDefeat.png" id="1_7hp67"]
+[ext_resource type="Script" path="res://scenes/menus/round_defeat.gd" id="1_s2eh3"]
 
-[node name="RoundDefeat" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rir3v"]
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+
+[node name="RoundDefeat" type="CanvasLayer"]
+script = ExtResource("1_s2eh3")
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
 anchors_preset = 15
@@ -17,3 +35,16 @@ vertical = true
 position = Vector2(478, 320.5)
 scale = Vector2(1.912, 1.278)
 texture = ExtResource("1_7hp67")
+
+[node name="BackBtn" type="Button" parent="."]
+offset_left = 590.0
+offset_top = 57.0
+offset_right = 925.0
+offset_bottom = 155.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.550293, 0.550293, 0.550293, 1)
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxFlat_rir3v")
+text = "Back"
+
+[connection signal="pressed" from="BackBtn" to="." method="_on_back_btn_pressed"]

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bhh6wls5np1ja" path="res://sprites/ufo/burn.png" id="3_u4t8o"]
 [ext_resource type="Texture2D" uid="uid://dutnfcox0gryp" path="res://sprites/ufo/exploded.png" id="4_a3rep"]
 [ext_resource type="Texture2D" uid="uid://bwh7ovltugoyo" path="res://sprites/ufo/zapped.png" id="5_2u2yt"]
-[ext_resource type="PackedScene" uid="uid://bomdoabrv0eno" path="res://scenes/components/health_component.tscn" id="6_ldj7d"]
+[ext_resource type="Script" path="res://scripts/components/health_component.gd" id="6_wrrg7"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_12iq2"]
 radius = 17.0
@@ -45,7 +45,9 @@ texture = ExtResource("5_2u2yt")
 wait_time = 2.0
 autostart = true
 
-[node name="HealthComponent" parent="." instance=ExtResource("6_ldj7d")]
+[node name="HealthComponent" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("6_wrrg7")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -19,7 +19,7 @@ expand_margin_top = 12.0
 expand_margin_right = 12.0
 expand_margin_bottom = 12.0
 
-[node name="Node2D" type="Node2D"]
+[node name="RoundSuccess" type="CanvasLayer"]
 script = ExtResource("1_wobga")
 
 [node name="BoxContainer" type="BoxContainer" parent="."]
@@ -36,14 +36,15 @@ position = Vector2(478, 320.5)
 scale = Vector2(1.912, 1.278)
 texture = ExtResource("1_y7oms")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 483.0
-offset_top = 324.0
-offset_right = 567.0
-offset_bottom = 422.0
+[node name="NextLevelBtn" type="Button" parent="."]
+offset_left = 452.0
+offset_top = 507.0
+offset_right = 787.0
+offset_bottom = 605.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0.550293, 0.550293, 0.550293, 1)
 theme_override_colors/font_outline_color = Color(0.550293, 0.550293, 0.550293, 1)
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_en71i")
-text = "60"
+text = "Next Level"
+
+[connection signal="pressed" from="NextLevelBtn" to="." method="_on_label_pressed"]

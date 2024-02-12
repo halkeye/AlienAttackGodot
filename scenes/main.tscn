@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://g0jaoevp4k4b"]
+[gd_scene load_steps=7 format=3 uid="uid://g0jaoevp4k4b"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_ygm3h"]
 [ext_resource type="PackedScene" uid="uid://diqwmmt6lahvb" path="res://scenes/city.tscn" id="2_7k887"]
 [ext_resource type="PackedScene" uid="uid://cewvp34yjb0ko" path="res://scenes/components/label_value.tscn" id="3_4g6ch"]
 [ext_resource type="PackedScene" uid="uid://bqlch05ol3ig3" path="res://scenes/weapon.tscn" id="4_edgso"]
+[ext_resource type="PackedScene" uid="uid://holkv76xoupg" path="res://scenes/menus/round_success.tscn" id="5_o264q"]
+[ext_resource type="PackedScene" uid="uid://d388jsdulny51" path="res://scenes/menus/round_defeat.tscn" id="6_ou8ns"]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_ygm3h")
@@ -56,5 +58,13 @@ offset_right = 904.0
 offset_bottom = 575.0
 scale = Vector2(2, 2)
 
-[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
-[connection signal="timeout" from="UFOFireTimer" to="." method="_on_ufo_fire_timer_timeout"]
+[node name="RoundSuccess" parent="." instance=ExtResource("5_o264q")]
+process_mode = 2
+visible = false
+
+[node name="RoundDefeat" parent="." instance=ExtResource("6_ou8ns")]
+process_mode = 2
+visible = false
+
+[connection signal="next_level" from="RoundSuccess" to="." method="_on_round_success_next_level"]
+[connection signal="back" from="RoundDefeat" to="." method="_on_round_defeat_back"]

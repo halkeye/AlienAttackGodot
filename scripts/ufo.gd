@@ -4,6 +4,7 @@ class_name UFO
 @onready var screensize = get_viewport_rect().size
 
 var bullet_scene = preload("res://scenes/bullet.tscn")
+@onready var health_component : HealthComponent = %HealthComponent
 
 signal health_depleted(ufo: UFO)
 
@@ -33,13 +34,13 @@ func _process(delta):
 	pass
 	
 func damage(amount: int = 1) -> bool:
-	return $HealthComponent.damage(amount)
+	return health_component.damage(amount)
 	
 func is_dead() -> bool:
-	return $HealthComponent.is_dead()
+	return health_component.is_dead()
 	
 func fire(pos: Vector2):
-	if $HealthComponent.is_dead():
+	if health_component.is_dead():
 		return
 		
 	var bullet = bullet_scene.instantiate() as Bullet
@@ -52,7 +53,7 @@ func fire(pos: Vector2):
 func reverse():
 	speed = -1 * speed 
 	velocity = Vector2(speed, 0)
-	if $HealthComponent.is_dead():
+	if health_component.is_dead():
 		queue_free()
 
 func set_on_fire():
@@ -77,7 +78,7 @@ func show_sprite(sprite: Sprite2D):
 	sprite.show()
 	
 func _on_ufo_fire_timer_timeout():
-	if $HealthComponent.is_dead():
+	if health_component.is_dead():
 		return
 		
 	if is_on_fire():
