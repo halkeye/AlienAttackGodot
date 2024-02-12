@@ -23,7 +23,7 @@ func segmentize(from_to: Vector2, start_pos: Vector2) -> void:
 	var distance : float = from_to.length()
 	sway = distance / sway_divider
 	sway = clamp(sway, 0, 10)
-	var segment_count : int = distance/divider
+	var segment_count : int = round(distance / divider)
 	for point in range(0, segment_count):
 		points_lerp.append(randf())
 	points_lerp.sort()
