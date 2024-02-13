@@ -46,7 +46,7 @@ func fire(pos: Vector2):
 	var bullet = bullet_scene.instantiate() as Bullet
 	var starting_pos = $".".global_position
 	bullet.set_collision_mask(1 << 2)
-	bullet.start(starting_pos, (pos - starting_pos).angle())
+	bullet.start(starting_pos, pos)
 	get_tree().root.add_child(bullet)
 	return bullet
 	

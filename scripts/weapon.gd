@@ -12,7 +12,9 @@ var basic_gun_image = preload("res://sprites/weapons/Basic Gun.png")
 var firestorm_gun_image = preload("res://sprites/weapons/firestormgun.png")
 var widearea_gun_image = preload("res://sprites/weapons/wideareagun.png")
 var zapper_gun_image = preload("res://sprites/weapons/zappergun.png")
+
 var bullet_scene = preload("res://scenes/bullet.tscn")
+var bullet_expanding_scene = preload("res://scenes/bullet_expanding.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,13 +35,13 @@ func set_gun_type(type):
 		$".".set_texture_normal(zapper_gun_image)
 	gun_type = type
 				
-func fire(pos: Vector2) -> void:
+func fire(target_pos: Vector2) -> void:
 	if is_fireing():
 		# can't fire while firing
 		return
 		
 	var start_pos = $".".global_position
-	var bullet = bullet_scene.instantiate()
+	var bullet = bullet_scene.instantiate() # FIXME
 
 	if gun_type == GunType.ZAPPER:
 		var generator = $LightningGenerator.duplicate()
@@ -47,9 +49,9 @@ func fire(pos: Vector2) -> void:
 			if bullet != null: # no collision
 				bullet.call_deferred("queue_free")
 		generator.lightning_done.connect(on_done)
-		generator.generate(get_parent(), start_pos, pos)
+		generator.generate(get_parent(), start_pos, target_pos)
 		# create the bullet
-		bullet.position = pos
+		bullet.position = target_pos
 		bullet.visible = false
 		get_parent().add_child(bullet)
 		$LightingSoundPlayer.seek(0.0)
@@ -64,8 +66,9 @@ func fire(pos: Vector2) -> void:
 	if gun_type == GunType.WIDEAREA:
 		$WideAreaSoundPlayer.seek(0.0)
 		$WideAreaSoundPlayer.play()
-			
-	bullet.start(start_pos, (pos - start_pos).angle())
+		bullet = bullet_expanding_scene.instantiate()
+		
+	bullet.start(start_pos, target_pos)
 	get_parent().add_child(bullet)
 
 func is_fireing() -> bool:
