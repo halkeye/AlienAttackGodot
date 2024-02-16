@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://6hhn2l6jjm2r"]
 
-[ext_resource type="Script" path="res://scenes/bullet_expanding.gd" id="1_5jwo1"]
-[ext_resource type="PackedScene" uid="uid://c1sg61qpco36d" path="res://scenes/bullet.tscn" id="2_sgkl2"]
+[ext_resource type="Script" path="res://scenes/bullets/bullet_widearea.gd" id="1_mxsrj"]
+[ext_resource type="PackedScene" uid="uid://c1sg61qpco36d" path="res://scenes/bullets/bullet.tscn" id="2_n64qm"]
 
 [sub_resource type="Animation" id="Animation_cs34p"]
 resource_name = "grow"
@@ -38,14 +38,16 @@ _data = {
 "grow": SubResource("Animation_cs34p")
 }
 
-[node name="BulletExpanding" type="Node"]
-script = ExtResource("1_5jwo1")
+[node name="BulletWideArea" type="Node2D"]
+script = ExtResource("1_mxsrj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_6bpjw")
 }
 
-[node name="bullet" parent="." instance=ExtResource("2_sgkl2")]
+[node name="bullet" parent="." instance=ExtResource("2_n64qm")]
 speed = 350
 destroy_on_hit = false
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

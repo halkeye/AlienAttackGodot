@@ -8,22 +8,28 @@ enum GunType {
 }
 @export var gun_type: GunType = GunType.BASIC : set=set_gun_type
 
+var bullet = null
+
 var basic_gun_image = preload("res://sprites/weapons/Basic Gun.png")
 var firestorm_gun_image = preload("res://sprites/weapons/firestormgun.png")
 var widearea_gun_image = preload("res://sprites/weapons/wideareagun.png")
 var zapper_gun_image = preload("res://sprites/weapons/zappergun.png")
 
-var bullet_scene = preload("res://scenes/bullet.tscn")
-var bullet_expanding_scene = preload("res://scenes/bullet_expanding.tscn")
+func _unhandled_input(event):
+	if event.is_action_pressed("weapon_switch"):
+		next_weapon()
+		
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				fire(get_global_mouse_position())
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-	
+func _on_gui_input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				next_weapon()
+					
 func set_gun_type(type):
 	if type == GunType.BASIC:
 		$".".set_texture_normal(basic_gun_image)
@@ -36,43 +42,25 @@ func set_gun_type(type):
 	gun_type = type
 				
 func fire(target_pos: Vector2) -> void:
-	if is_fireing():
+	if bullet != null:
 		# can't fire while firing
 		return
 		
 	var start_pos = $".".global_position
-	var bullet = bullet_scene.instantiate() # FIXME
 
 	if gun_type == GunType.ZAPPER:
-		var generator = $LightningGenerator.duplicate()
-		var on_done = func():
-			if bullet != null: # no collision
-				bullet.call_deferred("queue_free")
-		generator.lightning_done.connect(on_done)
-		generator.generate(get_parent(), start_pos, target_pos)
-		# create the bullet
-		bullet.position = target_pos
-		bullet.visible = false
-		get_parent().add_child(bullet)
-		$LightingSoundPlayer.seek(0.0)
-		$LightingSoundPlayer.play()
-		return
+		bullet = $BulletZapper.duplicate()
 	if gun_type == GunType.BASIC:
-		$BasicGunSoundPlayer.seek(0.0)
-		$BasicGunSoundPlayer.play()
+		bullet = $BulletBasic.duplicate()
 	if gun_type == GunType.FIRESTORM:
-		$FirestormSoundPlayer.seek(0.0)
-		$FirestormSoundPlayer.play()
+		bullet = $BulletFirestorm.duplicate()
 	if gun_type == GunType.WIDEAREA:
-		$WideAreaSoundPlayer.seek(0.0)
-		$WideAreaSoundPlayer.play()
-		bullet = bullet_expanding_scene.instantiate()
+		bullet = $BulletWideArea.duplicate()
 		
-	bullet.start(start_pos, target_pos)
+	bullet.global_position = start_pos
+	bullet.show()
 	get_parent().add_child(bullet)
-
-func is_fireing() -> bool:
-	return $LightingSoundPlayer.playing || $BasicGunSoundPlayer.playing ||$WideAreaSoundPlayer.playing || $FirestormSoundPlayer.playing
+	bullet.start(start_pos, target_pos)
 	
 func next_weapon(): 
 	if gun_type == GunType.BASIC:
@@ -83,9 +71,7 @@ func next_weapon():
 		gun_type = GunType.ZAPPER
 	elif gun_type == GunType.ZAPPER:
 		gun_type = GunType.BASIC
-		
-func _on_gui_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				next_weapon()
+
+func _on_child_exiting_tree(node):
+	if node == bullet:
+		bullet = null

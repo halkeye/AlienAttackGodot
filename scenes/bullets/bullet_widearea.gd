@@ -1,5 +1,7 @@
-extends Node
-class_name BulletExpanding
+extends Node2D
+class_name BulletWideArea
+
+@onready var bullet = $bullet
 
 var _target_pos: Vector2 = Vector2.ZERO
 		
@@ -8,7 +10,7 @@ func start(start_pos: Vector2, target_pos: Vector2):
 	$bullet.start(start_pos, target_pos)
 	
 func _to_string():
-	return "<BulletExpanding position="+str($bullet.position)+" velocity="+str($bullet.velocity)+" rotation="+str($bullet.rotation)+">"
+	return "<BulletWideArea position="+str($bullet.position)+" velocity="+str($bullet.velocity)+" rotation="+str($bullet.rotation)+">"
 
 func _process(delta):
 	if !$bullet:
@@ -22,3 +24,7 @@ func _process(delta):
 		if average_diff <= delta*$bullet.speed:
 			$bullet.velocity = Vector2.ZERO
 			$AnimationPlayer.play("grow")
+
+func _on_child_exiting_tree(node):
+	if node == bullet:
+		queue_free()

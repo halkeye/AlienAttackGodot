@@ -43,16 +43,6 @@ func _process(_delta):
 	if levelLabel:
 		levelLabel.values = [level]
 
-func _unhandled_input(event):
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				var mouse_position = get_global_mouse_position()
-				get_tree().call_group("weapons", "fire", mouse_position)
-
-	if event.is_action_pressed("weapon_switch"):
-		get_tree().call_group("weapons", "next_weapon")
-	
 func _on_ufo_health_depleted(_ufo: UFO):
 	score += 1
 	var all_ufos = get_tree().get_nodes_in_group("ufos")

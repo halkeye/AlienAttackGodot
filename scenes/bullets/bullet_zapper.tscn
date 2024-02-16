@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://gnd0x7lfeo0c"]
+
+[ext_resource type="Script" path="res://scenes/bullets/bullet_zapper.gd" id="1_fgqxt"]
+[ext_resource type="PackedScene" uid="uid://7uny7jhti6ok" path="res://scenes/components/lightning_generator.tscn" id="3_tvhrn"]
+[ext_resource type="AudioStream" uid="uid://hnrp0gxq6hss" path="res://sounds/143565__yvessch__zap.mp3" id="4_34e2b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kr4kh"]
+
+[node name="BulletZapper" type="Node2D"]
+script = ExtResource("1_fgqxt")
+
+[node name="LightningGenerator" parent="." instance=ExtResource("3_tvhrn")]
+
+[node name="LightingSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_34e2b")
+pitch_scale = 3.0
+bus = &"SFX"
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_kr4kh")
+
+[connection signal="lightning_done" from="LightningGenerator" to="." method="_on_lightning_generator_lightning_done"]

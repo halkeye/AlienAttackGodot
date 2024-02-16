@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://y71fq1qlw0hw"]
+
+[ext_resource type="Script" path="res://scenes/bullets/bullet_basic.gd" id="1_d1lea"]
+[ext_resource type="PackedScene" uid="uid://c1sg61qpco36d" path="res://scenes/bullets/bullet.tscn" id="2_vq4hq"]
+[ext_resource type="AudioStream" uid="uid://i661pmlw30p0" path="res://sounds/184651__isaac200000__cannon5.wav" id="3_jrpiy"]
+
+[node name="BulletBasic" type="Node2D"]
+script = ExtResource("1_d1lea")
+
+[node name="bullet" parent="." instance=ExtResource("2_vq4hq")]
+speed = 350
+destroy_on_hit = false
+
+[node name="BasicGunSoundPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_jrpiy")
+volume_db = 0.25
+bus = &"SFX"
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

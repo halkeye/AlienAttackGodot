@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dc24bqyqq7dn4"]
+[gd_scene load_steps=9 format=3 uid="uid://dc24bqyqq7dn4"]
 
 [ext_resource type="Script" path="res://scripts/ufo.gd" id="1_aav8l"]
 [ext_resource type="Texture2D" uid="uid://c6ucnqhk06606" path="res://sprites/ufo/ufo.png" id="2_adu61"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dutnfcox0gryp" path="res://sprites/ufo/exploded.png" id="4_a3rep"]
 [ext_resource type="Texture2D" uid="uid://bwh7ovltugoyo" path="res://sprites/ufo/zapped.png" id="5_2u2yt"]
 [ext_resource type="Script" path="res://scripts/components/health_component.gd" id="6_wrrg7"]
+[ext_resource type="PackedScene" uid="uid://c1sg61qpco36d" path="res://scenes/bullets/bullet.tscn" id="7_7wg5s"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_12iq2"]
 radius = 17.0
@@ -48,6 +49,11 @@ autostart = true
 [node name="HealthComponent" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("6_wrrg7")
+
+[node name="bullet" parent="." instance=ExtResource("7_7wg5s")]
+modulate = Color(0, 1, 0, 1)
+position = Vector2(0, 23)
+scale = Vector2(0.25, 0.25)
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
