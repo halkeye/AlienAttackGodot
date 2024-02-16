@@ -75,3 +75,7 @@ func next_weapon():
 func _on_child_exiting_tree(node):
 	if node == bullet:
 		bullet = null
+		
+func weapon():
+	if bullet != null:
+		bullet.queue_free()

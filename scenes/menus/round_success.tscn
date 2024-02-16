@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://holkv76xoupg"]
+[gd_scene load_steps=6 format=3 uid="uid://holkv76xoupg"]
 
 [ext_resource type="Script" path="res://scenes/menus/round_success.gd" id="1_wobga"]
 [ext_resource type="Texture2D" uid="uid://dpnw0saugdqdv" path="res://artwork/splash/RoundSuccess.png" id="1_y7oms"]
@@ -18,6 +18,14 @@ expand_margin_left = 12.0
 expand_margin_top = 12.0
 expand_margin_right = 12.0
 expand_margin_bottom = 12.0
+
+[sub_resource type="InputEventKey" id="InputEventKey_hfh0a"]
+device = -1
+keycode = 32
+unicode = 32
+
+[sub_resource type="Shortcut" id="Shortcut_m6vqm"]
+events = [SubResource("InputEventKey_hfh0a")]
 
 [node name="RoundSuccess" type="CanvasLayer"]
 script = ExtResource("1_wobga")
@@ -45,6 +53,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0.550293, 0.550293, 0.550293, 1)
 theme_override_font_sizes/font_size = 64
 theme_override_styles/normal = SubResource("StyleBoxFlat_en71i")
+shortcut = SubResource("Shortcut_m6vqm")
 text = "Next Level"
 
 [connection signal="pressed" from="NextLevelBtn" to="." method="_on_label_pressed"]

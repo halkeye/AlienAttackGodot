@@ -74,8 +74,9 @@ func _on_round_success_next_level():
 	$RoundSuccess.hide()
 	get_tree().paused = false
 	level += 1
+	get_tree().call_group("ufos", "queue_free")
+	get_tree().call_group("weapons", "reset")
 	create_ufos()
-
 
 func _on_round_defeat_back():
 	get_tree().paused = false
