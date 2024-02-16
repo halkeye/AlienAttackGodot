@@ -4,7 +4,6 @@ class_name Bullet
 @export var damage: int = 1
 @export var speed: int = 750
 @export var destroy_on_hit := true
-@export var shader_material : ShaderMaterial = null
 
 var velocity: Vector2 = Vector2.ZERO
 var _started = false
@@ -13,8 +12,6 @@ func _ready():
 	pass
 
 func _process(delta):
-	if $Bullet.material != shader_material:
-		$Bullet.material = shader_material
 	position += velocity * delta
 
 func start(start_pos: Vector2, target_pos: Vector2):
