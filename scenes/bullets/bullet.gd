@@ -5,6 +5,8 @@ class_name Bullet
 @export var speed: int = 750
 @export var destroy_on_hit := true
 
+signal hit_ufo(ufo: UFO)
+
 var velocity: Vector2 = Vector2.ZERO
 var _started = false
 
@@ -35,6 +37,8 @@ func _on_area_entered(area):
 	var hit_something = false
 	if area.has_method("damage"):
 		hit_something = area.damage(damage)
+		if area is UFO:
+			hit_ufo.emit(area)
 		
 	if destroy_on_hit && hit_something:
 		queue_free()

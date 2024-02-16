@@ -1,13 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck5m0limdgf44"]
+[gd_scene load_steps=9 format=3 uid="uid://ck5m0limdgf44"]
 
 [ext_resource type="Script" path="res://scenes/bullets/bullet_firestorm.gd" id="1_73df5"]
 [ext_resource type="PackedScene" uid="uid://c1sg61qpco36d" path="res://scenes/bullets/bullet.tscn" id="2_p7y0n"]
+[ext_resource type="Shader" path="res://scenes/bullets/bullet_fire.gdshader" id="3_a3w0u"]
 [ext_resource type="AudioStream" uid="uid://dac77vj3twtey" path="res://sounds/267887__wjl__short-fireball-woosh.mp3" id="4_4cc8u"]
-[ext_resource type="Shader" path="res://scenes/bullets/bullet_firestorm.gdshader" id="4_33p1d"]
+[ext_resource type="Texture2D" uid="uid://ujk5gyj4v78e" path="res://scenes/bullets/fire5.png" id="5_juoiy"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vkesr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sl3xc"]
+noise = SubResource("FastNoiseLite_vkesr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_txd2o"]
-shader = ExtResource("4_33p1d")
-shader_parameter/NEWCOLOR = Color(1, 0.737255, 0, 1)
+shader = ExtResource("3_a3w0u")
+shader_parameter/brighter_color = Color(1, 0.8, 0, 1)
+shader_parameter/middle_color = Color(1, 0.56, 0, 1)
+shader_parameter/darker_color = Color(0.64, 0.2, 0.05, 1)
+shader_parameter/spread = 0.5
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_sl3xc")
 
 [node name="BulletFirestorm" type="Node2D"]
 script = ExtResource("1_73df5")
@@ -17,10 +27,14 @@ stream = ExtResource("4_4cc8u")
 bus = &"SFX"
 
 [node name="bullet" parent="." instance=ExtResource("2_p7y0n")]
+scale = Vector2(0.25, 0.25)
 
 [node name="Bullet" parent="bullet" index="0"]
 material = SubResource("ShaderMaterial_txd2o")
+scale = Vector2(1, 1)
+texture = ExtResource("5_juoiy")
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]
+[connection signal="hit_ufo" from="bullet" to="." method="_on_bullet_hit_ufo"]
 
 [editable path="bullet"]

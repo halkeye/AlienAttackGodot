@@ -58,7 +58,11 @@ func reverse():
 		queue_free()
 
 func set_on_fire():
+	damage(1)
 	show_sprite($Burn)
+	var alive_ufos = get_overlapping_areas().filter(func(ufo: UFO): return ufo is UFO && !ufo.is_dead())
+	for ufo in alive_ufos:
+		ufo.set_on_fire()
 	
 func is_on_fire():
 	return $Burn.visible

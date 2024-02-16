@@ -14,3 +14,6 @@ func _to_string():
 func _on_child_exiting_tree(node):
 	if node == bullet:
 		queue_free()
+
+func _on_bullet_hit_ufo(ufo: UFO):
+	ufo.set_on_fire()

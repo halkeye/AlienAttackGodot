@@ -5,8 +5,8 @@ Converted to Godot Shader Language by Godot Shaders - godotshaders.com/shader/2D
 
 shader_type canvas_item;
 
-uniform sampler2D noise_tex;
-uniform sampler2D gradient_tex;
+uniform sampler2D noise_tex:repeat_enable;
+uniform sampler2D gradient_tex:repeat_enable;
 
 uniform vec4 brighter_color : source_color = vec4(1.0, 0.8, 0.0, 1.0);
 uniform vec4 middle_color : source_color  = vec4(1.0, 0.56, 0.0, 1.0);
